@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import {
   ImageProps,
   KeyboardTypeOptions,
@@ -63,4 +64,10 @@ export declare interface Properties {
   galleries: any;
   reviews: any;
   image: string;
+  featured: boolean;
+}
+
+export declare interface FiltersProps {
+  filter: string;
+  setFilter: Dispatch<SetStateAction<string>>;
 }

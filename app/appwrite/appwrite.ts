@@ -106,6 +106,7 @@ export const getAllProperties = async () => {
           galleries: document.galleries,
           reviews: document.reviews,
           image: document.image,
+          featured: document.featured,
         };
       });
 

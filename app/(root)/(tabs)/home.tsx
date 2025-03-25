@@ -1,8 +1,9 @@
 import { getAllProperties } from "@/app/appwrite/appwrite";
 import Card, { FeaturedCard } from "@/app/components/Card";
+import Filters from "@/app/components/Filters";
 import NotificationBell from "@/app/components/NotificationBell";
 import Search from "@/app/components/Search";
-import { cards, featuredCards } from "@/app/constants/data";
+import { featuredCards } from "@/app/constants/data";
 import seed from "@/app/lib/seed";
 import { Properties } from "@/app/lib/types";
 import { useClerk } from "@clerk/clerk-expo";
@@ -23,6 +24,11 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [properties, setProperties] = useState<Properties[]>();
+  const [filter, setFilter] = useState("All");
+
+  const featuredProperties = properties?.filter(
+    (property) => property.featured === true
+  );
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -77,15 +83,24 @@ export default function HomeScreen() {
               </View>
             </View>
             <FlatList
-              data={featuredCards}
+              data={featuredProperties?.slice(0, 4)}
               horizontal
-              renderItem={({ item }) => <FeaturedCard {...item} />}
-              keyExtractor={(item) => item.title}
+              renderItem={({ item }) => (
+                <FeaturedCard
+                  category={item.type}
+                  image={item.image}
+                  location={item.address}
+                  price={item.price.toString()}
+                  rating={item.rating}
+                  title={item.name}
+                />
+              )}
+              keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
               contentContainerClassName="gap-8 ml-6"
             />
-            <View className="flex-col my-4 px-6">
-              <View className="flex-row justify-between items-center">
+            <View className="flex-col my-4">
+              <View className="px-6 flex-row justify-between items-center">
                 <Text className="text-xl font-rubik-bold">
                   Our Recommendation
                 </Text>
@@ -95,6 +110,7 @@ export default function HomeScreen() {
                   </Text>
                 </TouchableOpacity>
               </View>
+              <Filters filter={filter} setFilter={setFilter} />
             </View>
           </View>
         );

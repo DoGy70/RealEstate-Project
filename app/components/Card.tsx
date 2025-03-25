@@ -14,7 +14,7 @@ export const FeaturedCard = ({
   return (
     <TouchableOpacity className="w-[250px] h-[340px] rounded-2xl">
       <Image
-        source={image}
+        source={{ uri: image }}
         className="relative rounded-3xl w-[250px] h-[340px] "
         resizeMode="cover"
       />
@@ -35,7 +35,7 @@ export const FeaturedCard = ({
           <Text className="font-rubik text-white">{location}</Text>
         </View>
         <View className="flex-row justify-between items-center">
-          <Text className="font-rubik-extrabold text-white">{price}</Text>
+          <Text className="font-rubik-extrabold text-white">${price}</Text>
           <TouchableOpacity className="px-2 py-2">
             <Image source={icons.heart} className="size-6" />
           </TouchableOpacity>
