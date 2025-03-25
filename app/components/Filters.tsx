@@ -29,7 +29,9 @@ const Filters = () => {
                 ? "bg-primary-100 text-white"
                 : "bg-primary-200"
             }`}
-            onPress={() => handleSearchFilters(item)}
+            onPress={(e) => {
+              handleSearchFilters(item);
+            }}
           >
             <Text
               className={`${

@@ -90,7 +90,7 @@ export default function HomeScreen() {
               </View>
             </View>
             <FlatList
-              data={featuredProperties?.slice(0, 4)}
+              data={loading ? [] : featuredProperties?.slice(0, 4)}
               horizontal
               renderItem={({ item }) => {
                 return (
@@ -106,7 +106,10 @@ export default function HomeScreen() {
               }}
               ListEmptyComponent={() =>
                 loading ? (
-                  <ActivityIndicator />
+                  <View className="flex-row gap-8">
+                    <ActivityIndicator className="w-[250px] h-[340px] justify-self-center bg-gray-300 rounded-2xl" />
+                    <ActivityIndicator className="w-[250px] h-[340px] justify-self-center bg-gray-300 rounded-2xl" />
+                  </View>
                 ) : (
                   <View>
                     <Text>No items found...</Text>
@@ -134,7 +137,7 @@ export default function HomeScreen() {
           </View>
         );
       }}
-      data={properties?.slice(0, 8)}
+      data={loading ? [] : properties?.slice(0, 8)}
       numColumns={2}
       renderItem={({ item }) => (
         <Card
@@ -148,7 +151,10 @@ export default function HomeScreen() {
       )}
       ListEmptyComponent={() =>
         loading ? (
-          <ActivityIndicator />
+          <View className="flex-1 flex-row justify-center grid col-span-2 gap-x-4 mx-5 h-[250px]">
+            <ActivityIndicator className="px-3 py-3 mb-4 bg-white rounded-lg w-1/2 " />
+            <ActivityIndicator className="px-3 py-3 mb-4 bg-white rounded-lg w-1/2" />
+          </View>
         ) : (
           <View>
             <Text>No properties found...</Text>
