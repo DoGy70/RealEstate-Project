@@ -1,9 +1,23 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import React from "react";
+import { Text, TouchableOpacity, FlatList } from "react-native";
+import React, { useState } from "react";
 import { categories } from "../constants/data";
-import { FiltersProps } from "../lib/types";
+import { router, useLocalSearchParams } from "expo-router";
 
-const Filters = ({ filter, setFilter }: FiltersProps) => {
+const Filters = () => {
+  const searchParams = useLocalSearchParams<{ filter?: string }>();
+  const [filter, setFilter] = useState(searchParams.filter || "All");
+
+  const handleSearchFilters = (item: { title: string; category: string }) => {
+    if (item.category === filter || item.category === "All") {
+      setFilter("");
+      router.setParams({ filter: "" });
+      return;
+    }
+
+    setFilter(item.title);
+    router.setParams({ filter: item.category });
+  };
+
   return (
     <FlatList
       data={categories}
@@ -11,25 +25,18 @@ const Filters = ({ filter, setFilter }: FiltersProps) => {
         return (
           <TouchableOpacity
             className={`justify-center mt-2 px-5 py-2 border border-gray-300 rounded-3xl ${
-              item.title === filter
+              item.category === filter
                 ? "bg-primary-100 text-white"
                 : "bg-primary-200"
             }`}
-            onPress={() => {
-              if (item.title === filter) {
-                setFilter("All");
-                return;
-              }
-
-              setFilter(item.title);
-            }}
+            onPress={() => handleSearchFilters(item)}
           >
             <Text
               className={`${
-                item.title === filter ? "text-white" : "text-black-300"
+                item.category === filter ? "text-white" : "text-black-300"
               }`}
             >
-              {item.title}
+              {item.category}
             </Text>
           </TouchableOpacity>
         );

@@ -66,8 +66,3 @@ export declare interface Properties {
   image: string;
   featured: boolean;
 }
-
-export declare interface FiltersProps {
-  filter: string;
-  setFilter: Dispatch<SetStateAction<string>>;
-}

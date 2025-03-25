@@ -1,4 +1,7 @@
-import { getAllProperties } from "@/app/appwrite/appwrite";
+import {
+  getAllProperties,
+  getFilteredProperties,
+} from "@/app/appwrite/appwrite";
 import Card, { FeaturedCard } from "@/app/components/Card";
 import Filters from "@/app/components/Filters";
 import Loading from "@/app/components/Loading";
@@ -7,6 +10,7 @@ import Search from "@/app/components/Search";
 import { Properties } from "@/app/lib/types";
 import { useClerk } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
+import { useSearchParams } from "expo-router/build/hooks";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -17,15 +21,17 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import SkeletonContent from "react-native-skeleton-content";
 
 export default function HomeScreen() {
   const { user } = useClerk();
-  const [properties, setProperties] = useState<Properties[]>();
-  const [filter, setFilter] = useState("All");
+  const [properties, setProperties] = useState<Properties[] | null>();
   const [loading, setLoading] = useState(false);
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const query = searchParams.get("query") || "";
+  const filter = searchParams.get("filter") || "";
 
   const featuredProperties = properties?.filter(
     (property) => property.featured === true
@@ -35,10 +41,7 @@ export default function HomeScreen() {
     const fetchProperties = async () => {
       setLoading(true);
       try {
-        const properties = await getAllProperties();
-
-        if (!properties)
-          throw new Error("There was a problem fetching the properties");
+        const properties = await getFilteredProperties(query, filter);
 
         setProperties(properties);
       } catch (error) {
@@ -49,7 +52,7 @@ export default function HomeScreen() {
     };
 
     fetchProperties();
-  }, []);
+  }, [query, filter]);
 
   return (
     <FlatList
@@ -112,7 +115,8 @@ export default function HomeScreen() {
               }
               keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
-              contentContainerClassName="gap-8 ml-6"
+              contentContainerClassName="gap-8"
+              className="px-6"
             />
             <View className="flex-col my-4">
               <View className="px-6 flex-row justify-between items-center">
@@ -125,7 +129,7 @@ export default function HomeScreen() {
                   </Text>
                 </TouchableOpacity>
               </View>
-              <Filters filter={filter} setFilter={setFilter} />
+              <Filters />
             </View>
           </View>
         );

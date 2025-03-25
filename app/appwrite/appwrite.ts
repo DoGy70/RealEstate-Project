@@ -81,6 +81,52 @@ export const updateUserPicture = async (
   }
 };
 
+export const getFilteredProperties = async (
+  query: string = "",
+  filter: string = ""
+) => {
+  try {
+    const response = await databases.listDocuments(
+      appwriteConfig.databaseID!,
+      appwriteConfig.propertiesCollection!,
+      [
+        Query.and([
+          Query.contains("name", query),
+          Query.contains("type", filter),
+        ]),
+      ]
+    );
+
+    if (response?.total === 0) return null;
+
+    const documents = response.documents;
+    const queriedProperties = documents.map((document) => {
+      return {
+        id: document.$id,
+        name: document.name,
+        type: document.type,
+        description: document.description,
+        address: document.address,
+        geolocation: document.geolocation,
+        price: document.price,
+        area: document.area,
+        bathrooms: document.bathrooms,
+        rating: document.rating,
+        facilities: document.facilities,
+        users: document.users,
+        galleries: document.galleries,
+        reviews: document.reviews,
+        image: document.image,
+        featured: document.featured,
+      };
+    });
+
+    return queriedProperties;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getAllProperties = async () => {
   try {
     const response = await databases.listDocuments(

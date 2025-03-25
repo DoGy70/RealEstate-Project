@@ -1,11 +1,20 @@
 import { View, TextInput, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import icons from "../constants/icons";
-import { useDebounce } from "use-debounce";
+import { useDebounce, useDebouncedCallback } from "use-debounce";
+import { router, useLocalSearchParams } from "expo-router";
 
 const Search = () => {
-  const [search, setSearch] = useState("");
-  const [debouncedSearch] = useDebounce(search, 1000);
+  const searchParams = useLocalSearchParams<{ query?: string }>();
+  const [search, setSearch] = useState(searchParams.query || "");
+  const debouncedSearch = useDebouncedCallback((text: string) => {
+    router.setParams({ query: text });
+  }, 1000);
+
+  const handleSearch = (text: string) => {
+    setSearch(text);
+    debouncedSearch(text);
+  };
 
   return (
     <View className="my-5 px-3 py-4 flex-row justify-between bg-gray-200 rounded-lg">
@@ -15,9 +24,7 @@ const Search = () => {
           className="flex-1 ml-2 font-rubik text-black-300 placeholder:text-black-300"
           placeholder="Search something"
           value={search}
-          onChangeText={(value) => {
-            setSearch(value);
-          }}
+          onChangeText={handleSearch}
         />
       </View>
       <TouchableOpacity>
