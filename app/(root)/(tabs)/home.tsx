@@ -1,16 +1,15 @@
 import { getAllProperties } from "@/app/appwrite/appwrite";
 import Card, { FeaturedCard } from "@/app/components/Card";
 import Filters from "@/app/components/Filters";
+import Loading from "@/app/components/Loading";
 import NotificationBell from "@/app/components/NotificationBell";
 import Search from "@/app/components/Search";
-import { featuredCards } from "@/app/constants/data";
-import seed from "@/app/lib/seed";
 import { Properties } from "@/app/lib/types";
 import { useClerk } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
-  Button,
+  ActivityIndicator,
   FlatList,
   Image,
   Text,
@@ -18,13 +17,15 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import SkeletonContent from "react-native-skeleton-content";
 
 export default function HomeScreen() {
   const { user } = useClerk();
-  const insets = useSafeAreaInsets();
-  const router = useRouter();
   const [properties, setProperties] = useState<Properties[]>();
   const [filter, setFilter] = useState("All");
+  const [loading, setLoading] = useState(false);
+  const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   const featuredProperties = properties?.filter(
     (property) => property.featured === true
@@ -32,6 +33,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const fetchProperties = async () => {
+      setLoading(true);
       try {
         const properties = await getAllProperties();
 
@@ -41,6 +43,8 @@ export default function HomeScreen() {
         setProperties(properties);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -85,16 +89,27 @@ export default function HomeScreen() {
             <FlatList
               data={featuredProperties?.slice(0, 4)}
               horizontal
-              renderItem={({ item }) => (
-                <FeaturedCard
-                  category={item.type}
-                  image={item.image}
-                  location={item.address}
-                  price={item.price.toString()}
-                  rating={item.rating}
-                  title={item.name}
-                />
-              )}
+              renderItem={({ item }) => {
+                return (
+                  <FeaturedCard
+                    category={item.type}
+                    image={item.image}
+                    location={item.address}
+                    price={item.price.toString()}
+                    rating={item.rating}
+                    title={item.name}
+                  />
+                );
+              }}
+              ListEmptyComponent={() =>
+                loading ? (
+                  <ActivityIndicator />
+                ) : (
+                  <View>
+                    <Text>No items found...</Text>
+                  </View>
+                )
+              }
               keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
               contentContainerClassName="gap-8 ml-6"
@@ -127,6 +142,15 @@ export default function HomeScreen() {
           rating={item.rating}
         />
       )}
+      ListEmptyComponent={() =>
+        loading ? (
+          <ActivityIndicator />
+        ) : (
+          <View>
+            <Text>No properties found...</Text>
+          </View>
+        )
+      }
       columnWrapperClassName="gap-4 justify-center"
       showsVerticalScrollIndicator={false}
       style={{

@@ -4,6 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/app/constants/images";
 import { Link, Redirect } from "expo-router";
 import { useClerk } from "@clerk/clerk-expo";
+import "react-native-reanimated";
+import "react-native-gesture-handler";
 
 export default function Index() {
   const { user } = useClerk();
