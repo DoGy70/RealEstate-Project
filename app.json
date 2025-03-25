@@ -5,9 +5,35 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "realestate",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "fonts": [
+      {
+        "asset": "./assets/fonts/Rubik-Bold.ttf",
+        "family": "Rubik-Bold"
+      },
+      {
+        "asset": "./assets/fonts/Rubik-ExtraBold.ttf",
+        "family": "Rubik-ExtraBold"
+      },
+      {
+        "asset": "./assets/fonts/Rubik-Light.ttf",
+        "family": "Rubik-Light"
+      },
+      {
+        "asset": "./assets/fonts/Rubik-Medium.ttf",
+        "family": "Rubik-Medium"
+      },
+      {
+        "asset": "./assets/fonts/Rubik-Regular.ttf",
+        "family": "Rubik-Regular"
+      },
+      {
+        "asset": "./assets/fonts/Rubik-SemiBold.ttf",
+        "family": "Rubik-SemiBold"
+      }
+    ],
     "ios": {
       "supportsTablet": true
     },
