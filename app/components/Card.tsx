@@ -5,14 +5,19 @@ import icons from "../constants/icons";
 import images from "../constants/images";
 
 export const FeaturedCard = ({
+  id,
   title,
   image,
   location,
   rating,
   price,
+  onPropertyPress,
 }: CardProps) => {
   return (
-    <TouchableOpacity className="w-[250px] h-[340px] rounded-2xl">
+    <TouchableOpacity
+      className="w-[250px] h-[340px] rounded-2xl"
+      onPress={() => onPropertyPress(id)}
+    >
       <Image
         source={{ uri: image }}
         className="relative rounded-3xl w-[250px] h-[340px] "
@@ -46,15 +51,18 @@ export const FeaturedCard = ({
 };
 
 const Card = ({
+  id,
   title,
   image,
   price,
-  category,
   location,
-  rating,
+  onPropertyPress,
 }: CardProps) => {
   return (
-    <TouchableOpacity className="flex-col px-3 py-3 mb-4 bg-white rounded-lg">
+    <TouchableOpacity
+      onPress={() => onPropertyPress(id)}
+      className="flex-col px-3 py-3 mb-4 bg-white rounded-lg"
+    >
       <View className="gap-1">
         <Image
           source={{ uri: image }}

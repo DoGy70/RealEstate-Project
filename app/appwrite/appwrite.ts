@@ -81,20 +81,28 @@ export const updateUserPicture = async (
   }
 };
 
-export const getFilteredProperties = async (
+export const getFilteredFeaturedProperties = async (
   query: string = "",
-  filter: string = ""
+  filter: string = "",
+  limit?: number
 ) => {
   try {
+    const queryBuilder = [
+      Query.and([
+        Query.contains("name", query),
+        Query.contains("type", filter),
+        Query.equal("featured", true),
+      ]),
+    ];
+
+    if (limit) {
+      queryBuilder.push(Query.limit(limit));
+    }
+
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
       appwriteConfig.propertiesCollection!,
-      [
-        Query.and([
-          Query.contains("name", query),
-          Query.contains("type", filter),
-        ]),
-      ]
+      [...queryBuilder]
     );
 
     if (response?.total === 0) return null;
@@ -111,6 +119,7 @@ export const getFilteredProperties = async (
         price: document.price,
         area: document.area,
         bathrooms: document.bathrooms,
+        bedrooms: document.bedrooms,
         rating: document.rating,
         facilities: document.facilities,
         users: document.users,
@@ -127,11 +136,72 @@ export const getFilteredProperties = async (
   }
 };
 
-export const getAllProperties = async () => {
+export const getFilteredProperties = async (
+  query: string = "",
+  filter: string = "",
+  limit?: number
+) => {
   try {
+    const queryBuilder = [
+      Query.and([
+        Query.contains("name", query),
+        Query.contains("type", filter),
+      ]),
+    ];
+
+    if (limit) {
+      queryBuilder.push(Query.limit(limit));
+    }
+
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
-      appwriteConfig.propertiesCollection!
+      appwriteConfig.propertiesCollection!,
+      [...queryBuilder]
+    );
+
+    if (response?.total === 0) return null;
+
+    const documents = response.documents;
+    const queriedProperties = documents.map((document) => {
+      return {
+        id: document.$id,
+        name: document.name,
+        type: document.type,
+        description: document.description,
+        address: document.address,
+        geolocation: document.geolocation,
+        price: document.price,
+        area: document.area,
+        bathrooms: document.bathrooms,
+        bedrooms: document.bedrooms,
+        rating: document.rating,
+        facilities: document.facilities,
+        users: document.users,
+        galleries: document.galleries,
+        reviews: document.reviews,
+        image: document.image,
+        featured: document.featured,
+      };
+    });
+
+    return queriedProperties;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAllProperties = async (limit?: number) => {
+  try {
+    const queryBuilder = [];
+
+    if (limit) {
+      queryBuilder.push(Query.limit(limit));
+    }
+
+    const response = await databases.listDocuments(
+      appwriteConfig.databaseID!,
+      appwriteConfig.propertiesCollection!,
+      [...queryBuilder]
     );
 
     if (response.total > 0) {
@@ -146,6 +216,7 @@ export const getAllProperties = async () => {
           price: document.price,
           area: document.area,
           bathrooms: document.bathrooms,
+          bedrooms: document.bedrooms,
           rating: document.rating,
           facilities: document.facilities,
           users: document.users,
@@ -160,6 +231,42 @@ export const getAllProperties = async () => {
     }
 
     return null;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getPropertyById = async (id: string) => {
+  try {
+    const document = await databases.getDocument(
+      appwriteConfig.databaseID!,
+      appwriteConfig.propertiesCollection!,
+      id
+    );
+
+    if (!document) return null;
+
+    const property = {
+      id: document.$id,
+      name: document.name,
+      type: document.type,
+      description: document.description,
+      address: document.address,
+      geolocation: document.geolocation,
+      price: document.price,
+      area: document.area,
+      bathrooms: document.bathrooms,
+      bedrooms: document.bedrooms,
+      rating: document.rating,
+      facilities: document.facilities,
+      users: document.users,
+      galleries: document.galleries,
+      reviews: document.reviews,
+      image: document.image,
+      featured: document.featured,
+    };
+
+    return property;
   } catch (error) {
     console.error(error);
   }

@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, FlatList } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import { categories } from "../constants/data";
 import { router, useLocalSearchParams } from "expo-router";
 
@@ -9,12 +9,12 @@ const Filters = () => {
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
     if (item.category === filter || item.category === "All") {
-      setFilter("");
+      setFilter("All");
       router.setParams({ filter: "" });
       return;
     }
 
-    setFilter(item.title);
+    setFilter(item.category);
     router.setParams({ filter: item.category });
   };
 
@@ -24,12 +24,12 @@ const Filters = () => {
       renderItem={({ item }) => {
         return (
           <TouchableOpacity
-            className={`justify-center mt-2 px-5 py-2 border border-gray-300 rounded-3xl ${
+            className={`justify-center px-5 py-3 border border-gray-300 rounded-3xl ${
               item.category === filter
                 ? "bg-primary-100 text-white"
                 : "bg-primary-200"
             }`}
-            onPress={(e) => {
+            onPress={() => {
               handleSearchFilters(item);
             }}
           >
@@ -45,8 +45,9 @@ const Filters = () => {
       }}
       horizontal
       contentContainerClassName="gap-2"
-      className="px-6"
+      className="px-6 mb-5"
       showsHorizontalScrollIndicator={false}
+      keyExtractor={(item) => item.title}
     />
   );
 };

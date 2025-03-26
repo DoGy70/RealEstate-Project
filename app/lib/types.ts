@@ -40,15 +40,17 @@ export declare interface AppwriteUser {
 }
 
 export declare interface CardProps {
+  id: string;
   title: string;
   location: string;
   price: string;
   rating: number;
   image: any;
   category: string;
+  onPropertyPress: (id: string) => void;
 }
 
-export declare interface Properties {
+export declare interface PropertyType {
   id: string;
   name: string;
   type: string;
@@ -58,11 +60,22 @@ export declare interface Properties {
   price: number;
   area: number;
   bathrooms: number;
+  bedrooms: number;
   rating: number;
-  facilities: string[];
+  facilities: facilityType[];
   users: any;
   galleries: any;
   reviews: any;
   image: string;
   featured: boolean;
 }
+
+export declare type facilityType =
+  | "Laundry"
+  | "Car Parking"
+  | "Sports Center"
+  | "Cutlery"
+  | "Gym"
+  | "Swimming pool"
+  | "Wifi"
+  | "Pet Center";
