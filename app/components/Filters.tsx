@@ -44,8 +44,8 @@ const Filters = () => {
         );
       }}
       horizontal
-      contentContainerClassName="gap-2"
-      className="px-6 mb-5"
+      contentContainerClassName="gap-2 px-6"
+      className="mb-5"
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item) => item.title}
     />

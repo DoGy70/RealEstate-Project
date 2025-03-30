@@ -118,8 +118,7 @@ const FeaturedProperties = () => {
         }
         keyExtractor={(item) => item.name}
         showsHorizontalScrollIndicator={false}
-        contentContainerClassName="gap-8"
-        className="px-6"
+        contentContainerClassName="gap-8 px-6"
       />
       <View className="flex-col my-4">
         <View className="px-6 flex-row justify-between items-center">

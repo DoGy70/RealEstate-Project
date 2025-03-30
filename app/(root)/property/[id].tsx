@@ -4,7 +4,6 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  SectionList,
   FlatList,
   ActivityIndicator,
 } from "react-native";
@@ -18,8 +17,8 @@ import icons from "@/app/constants/icons";
 import Rooms from "@/app/components/Room";
 import Title from "@/app/components/Title";
 import Facility from "@/app/components/Facility";
-import { getNumGalleries } from "@/app/lib/lib";
 import Gallery, { GalleryOpacity } from "@/app/components/Gallery";
+import Map from "@/app/components/Map";
 
 const Property = () => {
   const { id } = useLocalSearchParams();
@@ -183,19 +182,39 @@ const Property = () => {
         <View className="flex flex-col py-6 gap-3">
           <Title title="Gallery" />
           <View className="flex flex-row gap-3">
-            {property.galleries.slice(0, 3).map((gallery, index) => {
-              if (index == 2) {
-                return (
-                  <GalleryOpacity
-                    galleries={property.galleries.length}
-                    image={gallery.image}
-                    key={gallery.image}
-                  />
-                );
-              }
+            {property.galleries
+              .slice(0, 3)
+              .map((gallery: { image: any }, index: number) => {
+                if (index == 2) {
+                  return (
+                    <GalleryOpacity
+                      galleries={property.galleries.length}
+                      image={gallery.image}
+                      key={gallery.image}
+                    />
+                  );
+                }
 
-              return <Gallery image={gallery.image} key={gallery.image} />;
-            })}
+                return <Gallery image={gallery.image} key={gallery.image} />;
+              })}
+          </View>
+          <View className="flex flex-col py-6 gap-3">
+            <Title title="Location" />
+            <View className="flex flex-row gap-3 items-center">
+              <Image source={icons.location} className="size-6" />
+              <Text className="font-rubik text-black-300">
+                {property.address}
+              </Text>
+            </View>
+            <Map
+              address={
+                "Студентски Комплекс, ж.к. Студентски град 3, 1700 София"
+              }
+              image={property.image}
+            />
+          </View>
+          <View className="flex row py-6 gap-3">
+            <Image source={icons.star} className="size-24" />
           </View>
         </View>
       </View>

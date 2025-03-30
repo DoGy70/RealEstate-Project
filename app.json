@@ -35,9 +35,12 @@
       }
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymus.realestate",
+      "googleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY"
     },
     "android": {
+      "package": "com.anonymous.realestate",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
