@@ -1,30 +1,54 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
-import { getNumGalleries } from "../lib/lib";
+import React, { useState } from "react";
+import Title from "./Title";
+import ReactNativeModal from "react-native-modal";
+import Swiper from "react-native-swiper";
+import GalleryImage, { GalleryOpacity } from "./GalleryImage";
 
-export const GalleryOpacity = ({
-  image,
-  galleries,
-}: {
-  image: string;
-  galleries: number;
-}) => {
+const Gallery = ({ galleries }: { galleries: any }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleGalleryModal = () => {
+    setShowModal((oldModal) => !oldModal);
+  };
+
   return (
-    <View className="rounded-xl relative">
-      <Image className="size-32 rounded-xl" source={{ uri: image }} />
-      <View className="bg-[#00000080] absolute top-0 left-0 size-32 rounded-xl justify-center items-center">
-        <Text className="text-white text-center justify-center font-rubik-bold text-lg">
-          {getNumGalleries(galleries)}+
-        </Text>
+    <View className="gap-3">
+      <Title title="Gallery" />
+      <View className="flex flex-row gap-3">
+        {galleries.slice(0, 3).map((gallery: { image: any }, index: number) => {
+          if (index == 2) {
+            return (
+              <GalleryOpacity
+                galleries={galleries.length}
+                image={gallery.image}
+                key={gallery.image}
+                onPress={handleGalleryModal}
+              />
+            );
+          }
+
+          return <GalleryImage image={gallery.image} key={gallery.image} />;
+        })}
       </View>
-    </View>
-  );
-};
-
-const Gallery = ({ image }: { image: string }) => {
-  return (
-    <View className="rounded-xl">
-      <Image className="size-32 rounded-xl" source={{ uri: image }} />
+      <ReactNativeModal
+        isVisible={showModal}
+        onBackdropPress={() => setShowModal((oldModal) => !oldModal)}
+      >
+        <View className="w-full h-[350px] bg-white rounded-xl">
+          <Swiper className="rounded-xl">
+            {galleries.map((gallery: { image: any }) => {
+              return (
+                <Image
+                  key={gallery.image}
+                  source={{ uri: gallery.image }}
+                  className="w-full h-full rounded-xl"
+                />
+              );
+            })}
+          </Swiper>
+        </View>
+      </ReactNativeModal>
     </View>
   );
 };

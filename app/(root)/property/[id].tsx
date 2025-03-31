@@ -16,9 +16,11 @@ import icons from "@/app/constants/icons";
 import Rooms from "@/app/components/Room";
 import Title from "@/app/components/Title";
 import Facility from "@/app/components/Facility";
-import Gallery, { GalleryOpacity } from "@/app/components/Gallery";
+import Gallery from "@/app/components/Gallery";
 import Map from "@/app/components/Map";
 import Reviews from "@/app/components/Reviews";
+import ReactNativeModal from "react-native-modal";
+import { gallery } from "@/app/constants/data";
 
 const Property = () => {
   const { id } = useLocalSearchParams();
@@ -189,27 +191,8 @@ const Property = () => {
                   numColumns={4}
                 />
               </View>
-              <View className="flex flex-col py-6 gap-3">
-                <Title title="Gallery" />
-                <View className="flex flex-row gap-3">
-                  {property.galleries
-                    .slice(0, 3)
-                    .map((gallery: { image: any }, index: number) => {
-                      if (index == 2) {
-                        return (
-                          <GalleryOpacity
-                            galleries={property.galleries.length}
-                            image={gallery.image}
-                            key={gallery.image}
-                          />
-                        );
-                      }
-
-                      return (
-                        <Gallery image={gallery.image} key={gallery.image} />
-                      );
-                    })}
-                </View>
+              <View className="flex flex-col py-6">
+                <Gallery galleries={property.galleries} />
                 <View className="flex flex-col py-6 gap-3">
                   <Title title="Location" />
                   <View className="flex flex-row gap-3 items-center">
