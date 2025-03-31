@@ -79,3 +79,18 @@ export declare type facilityType =
   | "Swimming pool"
   | "Wifi"
   | "Pet Center";
+
+export declare interface ReviewsProps {
+  rating: number;
+  reviewNum: number;
+  reviews: ReviewType[];
+}
+
+export declare interface ReviewType {
+  name: string;
+  avatar: string;
+  review: string;
+  rating: number;
+  properties: PropertyType;
+  $createdAt: string;
+}
