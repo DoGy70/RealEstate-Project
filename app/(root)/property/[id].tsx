@@ -185,7 +185,7 @@ const Property = () => {
                     return <Facility facility={item} key={item} />;
                   }}
                   contentContainerClassName="justify-center items-center gap-5"
-                  columnWrapperClassName="gap-7"
+                  columnWrapperClassName="gap-7 justify-center"
                   numColumns={4}
                 />
               </View>
