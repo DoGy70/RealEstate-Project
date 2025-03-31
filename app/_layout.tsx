@@ -16,7 +16,11 @@ export default function RootLayout() {
     name: "",
     email: "",
     clerkId: "",
+    favoriteProperties: [],
   });
+  const [favorites, setFavorites] = useState<string[]>(
+    user.favoriteProperties ?? [""]
+  );
 
   if (!publishableKey) {
     throw new Error("Missing Publishable key. Please set it");
@@ -55,7 +59,7 @@ export default function RootLayout() {
   }
 
   return (
-    <GlobalContext.Provider value={{ user, setUser }}>
+    <GlobalContext.Provider value={{ user, setUser, favorites, setFavorites }}>
       <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
         <Stack screenOptions={{ headerShown: false }} />
       </ClerkProvider>

@@ -1,8 +1,10 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { CardProps } from "../lib/types";
 import icons from "../constants/icons";
 import images from "../constants/images";
+import { useGlobalContext } from "../lib/useGlobalContext";
+import { addToFavorites, removeFromFavorites } from "../appwrite/appwrite";
 
 export const FeaturedCard = ({
   id,
@@ -13,6 +15,39 @@ export const FeaturedCard = ({
   price,
   onPropertyPress,
 }: CardProps) => {
+  const { user, favorites, setFavorites } = useGlobalContext();
+  const [loading, setLoading] = useState(false);
+
+  const handleAddToFavorites = async () => {
+    try {
+      setLoading(true);
+      await addToFavorites(user.id, id);
+      setFavorites((oldFavorites) => [...oldFavorites, id]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemoveFromFavorites = async () => {
+    try {
+      setLoading(true);
+      await removeFromFavorites(user.id, id);
+      setFavorites((oldFavorites) => {
+        const newFavorites = oldFavorites.filter(
+          (oldFavorite) => oldFavorite !== id
+        );
+
+        return [...newFavorites];
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <TouchableOpacity
       className="w-[250px] h-[340px] rounded-2xl"
@@ -41,8 +76,25 @@ export const FeaturedCard = ({
         </View>
         <View className="flex-row justify-between items-center">
           <Text className="font-rubik-extrabold text-white">${price}</Text>
-          <TouchableOpacity className="px-2 py-2">
-            <Image source={icons.heart} className="size-6" />
+          <TouchableOpacity
+            className="px-2 py-2"
+            onPress={
+              favorites.includes(id)
+                ? handleRemoveFromFavorites
+                : handleAddToFavorites
+            }
+          >
+            <Image
+              source={icons.heart}
+              className="size-6"
+              tintColor={
+                loading
+                  ? "#FFFFFF40"
+                  : favorites?.includes(id)
+                  ? "#FF0000"
+                  : "#FFFFFF"
+              }
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -58,6 +110,39 @@ const Card = ({
   location,
   onPropertyPress,
 }: CardProps) => {
+  const { user, favorites, setFavorites } = useGlobalContext();
+  const [loading, setLoading] = useState(false);
+
+  const handleAddToFavorites = async () => {
+    try {
+      setLoading(true);
+      await addToFavorites(user.id, id);
+      setFavorites((oldFavorites) => [...oldFavorites, id]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemoveFromFavorites = async () => {
+    try {
+      setLoading(true);
+      await removeFromFavorites(user.id, id);
+      setFavorites((oldFavorites) => {
+        const newFavorites = oldFavorites.filter(
+          (oldFavorite) => oldFavorite !== id
+        );
+
+        return [...newFavorites];
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <TouchableOpacity
       onPress={() => onPropertyPress(id)}
@@ -75,8 +160,25 @@ const Card = ({
       </View>
       <View className="flex-row justify-between items-center">
         <Text className="font-rubik-bold text-primary-100">${price}</Text>
-        <TouchableOpacity className="px-2 py-2">
-          <Image source={icons.heart} className="size-6" tintColor="#8C8E98" />
+        <TouchableOpacity
+          onPress={
+            favorites.includes(id)
+              ? handleRemoveFromFavorites
+              : handleAddToFavorites
+          }
+          className="px-2 py-2"
+        >
+          <Image
+            source={icons.heart}
+            className="size-6"
+            tintColor={
+              loading
+                ? "#8C8E9840"
+                : favorites?.includes(id)
+                ? "#FF0000"
+                : "#8C8E98"
+            }
+          />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

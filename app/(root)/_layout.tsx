@@ -4,11 +4,10 @@ import { Redirect, Stack } from "expo-router";
 import { useClerk } from "@clerk/clerk-expo";
 import { useGlobalContext } from "../lib/useGlobalContext";
 import { getUser, updateUserPicture } from "../appwrite/appwrite";
-import { Text } from "react-native";
 
 const RootLayout = () => {
-  const { user, isSignedIn } = useClerk();
-  const { user: appwriteUser, setUser } = useGlobalContext();
+  const { user } = useClerk();
+  const { user: appwriteUser, setUser, setFavorites } = useGlobalContext();
 
   if (!user) {
     <Redirect href="/" />;
@@ -33,6 +32,7 @@ const RootLayout = () => {
 
   useEffect(() => {
     fetchUser();
+    setFavorites([...appwriteUser.favoriteProperties]);
   }, [fetchUser]);
 
   return (

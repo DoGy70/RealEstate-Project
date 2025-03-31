@@ -52,6 +52,11 @@ export const getUser = async (userId: string | undefined) => {
       clerkId: user.clerkId,
       email: user.email,
       imageUrl: user.imageUrl,
+      favoriteProperties: user.favorite_properties.map(
+        (favorite_property: any) => {
+          return favorite_property.$id;
+        }
+      ),
     };
   } catch (error) {
     console.error(error);
@@ -267,6 +272,67 @@ export const getPropertyById = async (id: string) => {
     };
 
     return property;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const addToFavorites = async (userId: string, propertyId: string) => {
+  try {
+    const document = await databases.getDocument(
+      appwriteConfig.databaseID!,
+      appwriteConfig.usersCollection!,
+      userId
+    );
+
+    if (!document) throw new Error("No user with that id.");
+
+    const response = await databases.updateDocument(
+      appwriteConfig.databaseID!,
+      appwriteConfig.usersCollection!,
+      userId,
+      {
+        favorite_properties: [...document.favorite_properties, propertyId],
+      }
+    );
+
+    if (!response) throw new Error("Error updating favorite_properties");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const removeFromFavorites = async (
+  userId: string,
+  propertyId: string
+) => {
+  try {
+    const document = await databases.getDocument(
+      appwriteConfig.databaseID!,
+      appwriteConfig.usersCollection!,
+      userId
+    );
+
+    if (!document) throw new Error("No user with that id.");
+
+    const newFavorites = document.favorite_properties.filter(
+      (favoriteProperty: any) => {
+        if (favoriteProperty.$id !== propertyId) {
+          return favoriteProperty.$id;
+        }
+      }
+    );
+
+    const response = await databases.updateDocument(
+      appwriteConfig.databaseID!,
+      appwriteConfig.usersCollection!,
+      userId,
+      {
+        favorite_properties: [...newFavorites],
+      }
+    );
+
+    if (!response) throw new Error("Error with updating favorite properties");
   } catch (error) {
     console.error(error);
   }

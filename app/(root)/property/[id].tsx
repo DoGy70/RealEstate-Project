@@ -8,7 +8,11 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { getPropertyById } from "@/app/appwrite/appwrite";
+import {
+  addToFavorites,
+  getPropertyById,
+  removeFromFavorites,
+} from "@/app/appwrite/appwrite";
 import { PropertyType } from "@/app/lib/types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
@@ -19,15 +23,47 @@ import Facility from "@/app/components/Facility";
 import Gallery from "@/app/components/Gallery";
 import Map from "@/app/components/Map";
 import Reviews from "@/app/components/Reviews";
-import ReactNativeModal from "react-native-modal";
-import { gallery } from "@/app/constants/data";
+import Agent from "@/app/components/Agent";
+import { useGlobalContext } from "@/app/lib/useGlobalContext";
 
 const Property = () => {
   const { id } = useLocalSearchParams();
+  const { user, favorites, setFavorites } = useGlobalContext();
   const [property, setProperty] = useState<PropertyType>();
+  const [favoriteLoading, setFavoritesLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const insets = useSafeAreaInsets();
   const router = useRouter();
+
+  const handleAddToFavorites = async () => {
+    try {
+      setFavoritesLoading(true);
+      await addToFavorites(user.id, id as string);
+      setFavorites((oldFavorites) => [...oldFavorites, id as string]);
+    } catch (error) {
+      console.error();
+    } finally {
+      setFavoritesLoading(false);
+    }
+  };
+
+  const handleRemoveFromFavorites = async () => {
+    try {
+      setFavoritesLoading(true);
+      await removeFromFavorites(user.id, id as string);
+      setFavorites((oldFavorites) => {
+        const newFavorites = oldFavorites.filter(
+          (oldFavorite) => oldFavorite !== id
+        );
+
+        return [...newFavorites];
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setFavoritesLoading(false);
+    }
+  };
 
   const handleBackButton = () => {
     router.back();
@@ -98,11 +134,23 @@ const Property = () => {
                   <Image source={icons.backArrow} className="size-8" />
                 </TouchableOpacity>
                 <View className="flex-row gap-5">
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={
+                      favorites.includes(id as string)
+                        ? handleRemoveFromFavorites
+                        : handleAddToFavorites
+                    }
+                  >
                     <Image
                       source={icons.heart}
                       className="size-8"
-                      tintColor="#191D31"
+                      tintColor={
+                        favoriteLoading
+                          ? "#191D3140"
+                          : favorites.includes(id as string)
+                          ? "#FF0000"
+                          : "#191D31"
+                      }
                     />
                   </TouchableOpacity>
                   <TouchableOpacity>
@@ -150,28 +198,8 @@ const Property = () => {
                   />
                 </View>
               </View>
-              <View className="flex flex-col py-6 gap-3 ">
-                <Title title="Agent" />
-                <View className="flex flex-row items-center justify-between">
-                  <View className="flex-row items-center gap-5">
-                    <Image
-                      source={{ uri: property.users.imageUrl }}
-                      className="size-16 rounded-full"
-                    />
-                    <View className="flex flex-col gap-1">
-                      <Text className="font-rubik-bold text-base">
-                        {property.users.name}
-                      </Text>
-                      <Text className="font-rubik text-black-300 text-sm">
-                        Owner
-                      </Text>
-                    </View>
-                  </View>
-                  <View className="flex-row gap-4">
-                    <Image source={icons.chat} className="size-8" />
-                    <Image source={icons.phone} className="size-8" />
-                  </View>
-                </View>
+              <View className="flex flex-col py-6 ">
+                <Agent users={property.users} />
               </View>
               <View className="flex flex-col py-6 gap-3">
                 <Title title="Overview" />

@@ -16,7 +16,14 @@ export default function ProfileScreen() {
   const handleSignout = async () => {
     try {
       await signOut();
-      setUser({ id: "", name: "", email: "", clerkId: "", imageUrl: "" });
+      setUser({
+        id: "",
+        name: "",
+        email: "",
+        clerkId: "",
+        imageUrl: "",
+        favoriteProperties: [],
+      });
       router.replace("/");
     } catch (error) {
       console.error(error);

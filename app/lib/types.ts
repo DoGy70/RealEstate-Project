@@ -37,6 +37,7 @@ export declare interface AppwriteUser {
   name?: string;
   email: string;
   imageUrl?: string;
+  favoriteProperties: string[];
 }
 
 export declare interface CardProps {
