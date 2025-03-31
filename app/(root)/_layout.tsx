@@ -7,7 +7,7 @@ import { getUser, updateUserPicture } from "../appwrite/appwrite";
 
 const RootLayout = () => {
   const { user } = useClerk();
-  const { user: appwriteUser, setUser, setFavorites } = useGlobalContext();
+  const { setUser, setFavorites } = useGlobalContext();
 
   if (!user) {
     <Redirect href="/" />;
@@ -25,6 +25,7 @@ const RootLayout = () => {
       }
 
       setUser(appwriteUser);
+      setFavorites([...appwriteUser.favoriteProperties]);
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +33,6 @@ const RootLayout = () => {
 
   useEffect(() => {
     fetchUser();
-    setFavorites([...appwriteUser.favoriteProperties]);
   }, [fetchUser]);
 
   return (

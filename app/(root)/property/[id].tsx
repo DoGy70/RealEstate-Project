@@ -229,12 +229,7 @@ const Property = () => {
                       {property.address}
                     </Text>
                   </View>
-                  <Map
-                    address={
-                      "Студентски Комплекс, ж.к. Студентски град 3, 1700 София"
-                    }
-                    image={property.image}
-                  />
+                  <Map address={property.address} image={property.image} />
                 </View>
                 <View className="flex-col pt-6 gap-3">
                   <Reviews

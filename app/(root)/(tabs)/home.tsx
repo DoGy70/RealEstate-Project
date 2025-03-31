@@ -4,7 +4,7 @@ import Filters from "@/app/components/Filters";
 import seed from "@/app/lib/seed";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
 import { useState } from "react";
-import { ScrollView } from "react-native";
+import { Button, ScrollView } from "react-native";
 
 export default function HomeScreen() {
   const { user } = useGlobalContext();
@@ -12,7 +12,7 @@ export default function HomeScreen() {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <FeaturedProperties />
-      {/* <Button title="seed" onPress={seed} /> */}
+      <Button title="seed" onPress={seed} />
       <Filters />
       <AllProperties />
     </ScrollView>

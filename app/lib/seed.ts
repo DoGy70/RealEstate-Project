@@ -36,6 +36,30 @@ const facilities = [
   "Pet Center",
 ];
 
+const addresses = [
+  "8 33 кв. Враждебна, Kremikovci, Sofia",
+  "бл.234, zh.k. Obelya 2, Sofia",
+  "3 Sv. Georgi Sofiyski St kv., Kriva reka, Sofia",
+  "38 Chavdar Mutafov St, ж.г. Зоопарк, Sofia",
+  "24 Omainiche St, Sofia, 1137, Bulgaria",
+  "131 бул. Княгиня Мария Луиза, TETS Sofia, Sofia",
+  "33 Damyan Gruev St, Sofia, 1606",
+  "Smile Factory, 51 Vasil Drumev St, Sofia",
+  "бл.72, Sofia",
+  "ул. Граф Игнатиев 12, Sofia",
+  "ул. Шипка 6, Sofia",
+  "ул. Пиротска 17, Sofia",
+  "8 33 кв. Враждебна, Kremikovci, Sofia",
+  "бул. Патриарх Евтимий 36, Sofia",
+  "ул. Шипка 6, Sofia",
+  "бул. Дондуков 15, Sofia",
+  "ул. Раковски 108, Sofia",
+  "бул. Цар Освободител 22, Sofia",
+  "ул. Славянска 3, Sofia",
+  "бул. България 98, Sofia",
+  "ул. Оборище 21, Sofia",
+];
+
 function getRandomSubset<T>(
   array: T[],
   minItems: number,
@@ -166,7 +190,7 @@ async function seed() {
           name: `Property ${i}`,
           type: propertyTypes[Math.floor(Math.random() * propertyTypes.length)],
           description: `This is the description for Property ${i}.`,
-          address: `123 Property Street, City ${i}`,
+          address: addresses[i],
           geolocation: `192.168.1.${i}, 192.168.1.${i}`,
           price: Math.floor(Math.random() * 9000) + 1000,
           area: Math.floor(Math.random() * 3000) + 500,

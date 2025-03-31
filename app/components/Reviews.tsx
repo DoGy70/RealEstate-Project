@@ -16,7 +16,7 @@ const Reviews = ({ rating, reviewNum, reviews }: ReviewsProps) => {
               {rating}
             </Text>
             <Text className="font-rubik-bold text-xl text-center">
-              ({reviewNum} reviews)
+              ({reviewNum} {reviewNum > 1 ? "reviews" : "review"})
             </Text>
           </View>
         </View>
