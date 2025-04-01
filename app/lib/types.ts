@@ -95,3 +95,10 @@ export declare interface ReviewType {
   properties: PropertyType;
   $createdAt: string;
 }
+
+export declare interface NumberInputProps {
+  title: string;
+  facility: string;
+  handleFacilityIncrease: () => void;
+  handleFacilityDecrease: () => void;
+}

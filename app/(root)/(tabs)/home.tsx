@@ -1,20 +1,33 @@
+import { useRef } from "react";
+import { ActionSheetRef } from "react-native-actions-sheet";
 import AllProperties from "@/app/components/AllProperties";
 import FeaturedProperties from "@/app/components/FeaturedProperties";
 import Filters from "@/app/components/Filters";
 import seed from "@/app/lib/seed";
-import { useGlobalContext } from "@/app/lib/useGlobalContext";
-import { useState } from "react";
-import { Button, ScrollView } from "react-native";
+import { FlatList, ScrollView, View } from "react-native";
+import AdditionalFilters from "@/app/components/AdditionalFilters";
 
 export default function HomeScreen() {
-  const { user } = useGlobalContext();
-
+  const actionSheetRef = useRef<ActionSheetRef>(null);
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <FeaturedProperties />
-      <Button title="seed" onPress={seed} />
-      <Filters />
-      <AllProperties />
-    </ScrollView>
+    <FlatList
+      ListHeaderComponent={() => {
+        return (
+          <View>
+            <FeaturedProperties actionSheetRef={actionSheetRef} />
+            {/* <Button title="seed" onPress={seed} /> */}
+            <Filters />
+          </View>
+        );
+      }}
+      data={["asd"]}
+      renderItem={() => {
+        return <AllProperties />;
+      }}
+      ListFooterComponent={() => {
+        return <AdditionalFilters actionSheetRef={actionSheetRef} />;
+      }}
+      showsVerticalScrollIndicator={false}
+    />
   );
 }

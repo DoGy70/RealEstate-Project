@@ -25,6 +25,7 @@ import Map from "@/app/components/Map";
 import Reviews from "@/app/components/Reviews";
 import Agent from "@/app/components/Agent";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
+import images from "@/app/constants/images";
 
 const Property = () => {
   const { id } = useLocalSearchParams();
@@ -115,16 +116,37 @@ const Property = () => {
           <View>
             <View className="flex-col relative">
               <Swiper className="h-[380px]">
-                {property.galleries.map((gallery: any) => {
-                  return (
+                {property.galleries.length > 0 ? (
+                  property.galleries.map((gallery: any) => {
+                    return (
+                      <View className="relative" key={gallery.image}>
+                        <Image
+                          source={{ uri: gallery?.image }}
+                          className="w-full h-[380px]"
+                          resizeMode="cover"
+                        />
+                        <Image
+                          source={images.whiteGradient}
+                          className="w-full h-[380px] absolute top-0 left-0"
+                          resizeMode="cover"
+                        />
+                      </View>
+                    );
+                  })
+                ) : (
+                  <View className="relative">
                     <Image
-                      source={{ uri: gallery?.image }}
-                      key={gallery.image}
+                      source={{ uri: property?.image }}
                       className="w-full h-[380px]"
                       resizeMode="cover"
                     />
-                  );
-                })}
+                    <Image
+                      source={images.whiteGradient}
+                      className="w-full h-[380px] absolute top-0 left-0"
+                      resizeMode="cover"
+                    />
+                  </View>
+                )}
               </Swiper>
               <View
                 className="flex-row justify-between w-full absolute px-6 items-center"
@@ -220,7 +242,16 @@ const Property = () => {
                 />
               </View>
               <View className="flex flex-col py-6">
-                <Gallery galleries={property.galleries} />
+                {property.galleries.length == 0 ? (
+                  <View>
+                    <Title title="Gallery" />
+                    <Text className="font-rubik-bold text-primary-100">
+                      No gallery found...
+                    </Text>
+                  </View>
+                ) : (
+                  <Gallery galleries={property.galleries} />
+                )}
                 <View className="flex flex-col py-6 gap-3">
                   <Title title="Location" />
                   <View className="flex flex-row gap-3 items-center">
@@ -232,11 +263,20 @@ const Property = () => {
                   <Map address={property.address} image={property.image} />
                 </View>
                 <View className="flex-col pt-6 gap-3">
-                  <Reviews
-                    reviewNum={property.reviews.length}
-                    rating={property.rating}
-                    reviews={property.reviews}
-                  />
+                  {property.reviews.length == 0 ? (
+                    <View>
+                      <Title title="Reviews" />
+                      <Text className="font-rubik-bold text-primary-100">
+                        No reviews found...
+                      </Text>
+                    </View>
+                  ) : (
+                    <Reviews
+                      reviewNum={property.reviews.length}
+                      rating={property.rating}
+                      reviews={property.reviews}
+                    />
+                  )}
                 </View>
               </View>
             </View>

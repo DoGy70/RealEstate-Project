@@ -3,8 +3,14 @@ import React, { useState } from "react";
 import icons from "../constants/icons";
 import { useDebounce, useDebouncedCallback } from "use-debounce";
 import { router, useLocalSearchParams } from "expo-router";
+import { ActionSheetRef } from "react-native-actions-sheet";
+import Title from "./Title";
 
-const Search = () => {
+const Search = ({
+  actionSheetRef,
+}: {
+  actionSheetRef: React.RefObject<ActionSheetRef>;
+}) => {
   const searchParams = useLocalSearchParams<{ query?: string }>();
   const [search, setSearch] = useState(searchParams.query || "");
   const debouncedSearch = useDebouncedCallback((text: string) => {
@@ -27,7 +33,7 @@ const Search = () => {
           onChangeText={handleSearch}
         />
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => actionSheetRef?.current?.show()}>
         <Image source={icons.filter} className="size-6" />
       </TouchableOpacity>
     </View>

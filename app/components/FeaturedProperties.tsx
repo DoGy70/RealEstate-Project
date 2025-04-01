@@ -16,8 +16,13 @@ import { getFilteredFeaturedProperties } from "../appwrite/appwrite";
 import { FeaturedCard } from "./Card";
 import Search from "./Search";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ActionSheetRef } from "react-native-actions-sheet";
 
-const FeaturedProperties = () => {
+const FeaturedProperties = ({
+  actionSheetRef,
+}: {
+  actionSheetRef: React.RefObject<ActionSheetRef>;
+}) => {
   const router = useRouter();
   const { user } = useClerk();
   const [properties, setProperties] = useState<PropertyType[] | null>();
@@ -76,10 +81,12 @@ const FeaturedProperties = () => {
             </View>
             <NotificationBell />
           </View>
-          <Search />
+          <Search actionSheetRef={actionSheetRef} />
           <View className="flex-row justify-between mb-4">
             <Text className="text-xl font-rubik-bold">Featured</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => router.push("/(root)/(tabs)/explore")}
+            >
               <Text className="text-lg font-rubik-bold text-primary-100">
                 See All
               </Text>
@@ -124,7 +131,9 @@ const FeaturedProperties = () => {
         <View className="px-6 flex-row justify-between items-center">
           <Text className="text-xl font-rubik-bold">Our Recommendation</Text>
           <TouchableOpacity>
-            <Text className="font-rubik-bold text-primary-100">See All</Text>
+            <Text className="text-lg font-rubik-bold text-primary-100">
+              See All
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
