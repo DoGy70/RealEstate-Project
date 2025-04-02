@@ -12,7 +12,7 @@ import { useClerk } from "@clerk/clerk-expo";
 import NotificationBell from "./NotificationBell";
 import { PropertyType } from "../lib/types";
 import { useSearchParams } from "expo-router/build/hooks";
-import { getFilteredFeaturedProperties } from "../appwrite/appwrite";
+import { getFilteredFeaturedProperties } from "../appwrite/property";
 import { FeaturedCard } from "./Card";
 import Search from "./Search";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

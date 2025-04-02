@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { PropertyType } from "../lib/types";
 import { useSearchParams } from "expo-router/build/hooks";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { getFilteredProperties } from "../appwrite/appwrite";
+import { getFilteredProperties } from "../appwrite/property";
 import Card from "./Card";
 
 const AllProperties = () => {

@@ -8,11 +8,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import {
-  addToFavorites,
-  getPropertyById,
-  removeFromFavorites,
-} from "@/app/appwrite/appwrite";
+import { addToFavorites, removeFromFavorites } from "@/app/appwrite/user";
 import { PropertyType } from "@/app/lib/types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
@@ -27,6 +23,7 @@ import Agent from "@/app/components/Agent";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
 import images from "@/app/constants/images";
 import Checkout from "@/app/components/Checkout";
+import { getPropertyById } from "@/app/appwrite/property";
 
 const Property = () => {
   const { id } = useLocalSearchParams();

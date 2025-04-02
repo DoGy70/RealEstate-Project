@@ -10,7 +10,7 @@ import GoogleLogin from "../components/GoogleLogin";
 import { ReactNativeModal } from "react-native-modal";
 import icons from "../constants/icons";
 import CustomButton from "../components/CustomButton";
-import { addUser } from "../appwrite/appwrite";
+import { addUser } from "../appwrite/user";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
