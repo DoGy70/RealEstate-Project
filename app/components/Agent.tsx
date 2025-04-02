@@ -15,11 +15,11 @@ const Agent = ({ users }: { users: any }) => {
       <View className="flex flex-row items-center justify-between">
         <View className="flex-row items-center gap-5">
           <Image
-            source={{ uri: users.imageUrl }}
+            source={{ uri: users?.imageUrl }}
             className="size-16 rounded-full"
           />
           <View className="flex flex-col gap-1">
-            <Text className="font-rubik-bold text-base">{users.name}</Text>
+            <Text className="font-rubik-bold text-base">{users?.name}</Text>
             <Text className="font-rubik text-black-300 text-sm">Owner</Text>
           </View>
         </View>

@@ -6,7 +6,7 @@ import * as Fonts from "expo-font";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
 import { GlobalContext } from "./context/Context";
-import { AppwriteUser } from "./lib/types";
+import { AppwriteUser, PropertyType } from "./lib/types";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -21,6 +21,25 @@ export default function RootLayout() {
   const [favorites, setFavorites] = useState<string[]>(
     user.favoriteProperties ?? [""]
   );
+  const [property, setProperty] = useState<PropertyType>({
+    address: "",
+    area: 0,
+    bathrooms: 0,
+    bedrooms: 0,
+    description: "",
+    facilities: ["Laundry"],
+    featured: false,
+    galleries: [],
+    geolocation: "",
+    id: "",
+    image: "",
+    name: "",
+    price: 1,
+    rating: 1,
+    reviews: [],
+    type: "",
+    users: [],
+  });
 
   if (!publishableKey) {
     throw new Error("Missing Publishable key. Please set it");
@@ -59,7 +78,9 @@ export default function RootLayout() {
   }
 
   return (
-    <GlobalContext.Provider value={{ user, setUser, favorites, setFavorites }}>
+    <GlobalContext.Provider
+      value={{ user, setUser, favorites, setFavorites, property, setProperty }}
+    >
       <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
         <Stack screenOptions={{ headerShown: false }} />
       </ClerkProvider>

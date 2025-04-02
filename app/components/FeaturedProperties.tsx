@@ -30,9 +30,14 @@ const FeaturedProperties = ({
   const searchParams = useSearchParams();
   const insets = useSafeAreaInsets();
 
-  const query = searchParams.get("query") || "";
-  const filter = searchParams.get("filter") || "";
-
+  const filters = {
+    filter: searchParams.get("filter"),
+    query: searchParams.get("query"),
+    minimumPrice: searchParams.get("minimumPrice"),
+    maximumPrice: searchParams.get("maximumPrice"),
+    bathrooms: searchParams.get("bathrooms"),
+    bedrooms: searchParams.get("bedrooms"),
+  };
   const handlePropertyPress = (id: string) => {
     router.push(`/(root)/property/${id}`);
   };
@@ -42,8 +47,7 @@ const FeaturedProperties = ({
       setLoading(true);
       try {
         const properties = await getFilteredFeaturedProperties(
-          query,
-          filter,
+          { ...filters },
           4
         );
 
@@ -56,7 +60,14 @@ const FeaturedProperties = ({
     };
 
     fetchProperties();
-  }, [query, filter]);
+  }, [
+    filters.bathrooms,
+    filters.bedrooms,
+    filters.filter,
+    filters.maximumPrice,
+    filters.minimumPrice,
+    filters.query,
+  ]);
 
   return (
     <View style={{ paddingTop: insets.top }}>

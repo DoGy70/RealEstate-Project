@@ -14,8 +14,14 @@ const AllProperties = () => {
   const insets = useSafeAreaInsets();
   const router = useRouter();
 
-  const query = searchParams.get("query") || "";
-  const filter = searchParams.get("filter") || "";
+  const filters = {
+    filter: searchParams.get("filter"),
+    query: searchParams.get("query"),
+    minimumPrice: searchParams.get("minimumPrice"),
+    maximumPrice: searchParams.get("maximumPrice"),
+    bathrooms: searchParams.get("bathrooms"),
+    bedrooms: searchParams.get("bedrooms"),
+  };
 
   const handlePropertyPress = (id: string) => {
     router.push(`/(root)/property/${id}`);
@@ -25,7 +31,7 @@ const AllProperties = () => {
     const fetchProperties = async () => {
       setLoading(true);
       try {
-        const properties = await getFilteredProperties(query, filter, 8);
+        const properties = await getFilteredProperties({ ...filters }, 8);
 
         setProperties(properties);
       } catch (error) {
@@ -36,7 +42,14 @@ const AllProperties = () => {
     };
 
     fetchProperties();
-  }, [query, filter]);
+  }, [
+    filters.bathrooms,
+    filters.bedrooms,
+    filters.filter,
+    filters.maximumPrice,
+    filters.minimumPrice,
+    filters.query,
+  ]);
 
   return (
     <View>

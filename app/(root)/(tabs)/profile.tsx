@@ -6,9 +6,11 @@ import { useClerk } from "@clerk/clerk-expo";
 import icons from "@/app/constants/icons";
 import NotificationBell from "@/app/components/NotificationBell";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
+import { useStripe } from "@stripe/stripe-react-native";
 
 export default function ProfileScreen() {
   const { user, signOut } = useClerk();
+  const { resetPaymentSheetCustomer } = useStripe();
   const { setUser } = useGlobalContext();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -24,6 +26,7 @@ export default function ProfileScreen() {
         imageUrl: "",
         favoriteProperties: [],
       });
+      await resetPaymentSheetCustomer();
       router.replace("/");
     } catch (error) {
       console.error(error);

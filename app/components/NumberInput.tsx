@@ -20,9 +20,9 @@ const NumberInput = ({
           <Text className="font-rubik-bold text-primary-100">-</Text>
         </TouchableOpacity>
         <TextInput
-          value={facility}
+          value={facility.toString()}
           className="font-rubik"
-          placeholder={facility}
+          placeholder={facility.toString()}
         />
         <TouchableOpacity
           className="bg-primary-300 px-2 py-1 rounded-full items-center justify-center"

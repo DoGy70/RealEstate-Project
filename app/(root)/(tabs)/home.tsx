@@ -3,8 +3,7 @@ import { ActionSheetRef } from "react-native-actions-sheet";
 import AllProperties from "@/app/components/AllProperties";
 import FeaturedProperties from "@/app/components/FeaturedProperties";
 import Filters from "@/app/components/Filters";
-import seed from "@/app/lib/seed";
-import { FlatList, ScrollView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import AdditionalFilters from "@/app/components/AdditionalFilters";
 
 export default function HomeScreen() {

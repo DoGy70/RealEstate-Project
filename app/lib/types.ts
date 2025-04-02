@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import {
   ImageProps,
   KeyboardTypeOptions,
@@ -98,7 +97,16 @@ export declare interface ReviewType {
 
 export declare interface NumberInputProps {
   title: string;
-  facility: string;
+  facility: string | number;
   handleFacilityIncrease: () => void;
   handleFacilityDecrease: () => void;
+}
+
+export declare interface FetchFilteredProperties {
+  query: string | null;
+  filter: string | null;
+  minimumPrice: string | null;
+  maximumPrice: string | null;
+  bathrooms: string | null;
+  bedrooms: string | null;
 }

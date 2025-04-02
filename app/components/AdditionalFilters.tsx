@@ -29,24 +29,30 @@ const AdditionalFilters = ({
     bedrooms?: string;
     bathrooms?: string;
   }>();
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<{
+    filter: string;
+    maximumPrice: string;
+    minimumPrice: string;
+    bedrooms: string | number;
+    bathrooms: string | number;
+  }>({
     maximumPrice: params.maximumPrice || "5000",
     minimumPrice: params.minimumPrice || "0",
-    propertyType: params.filter || "All",
-    bedrooms: params.bedrooms || "1",
-    bathrooms: params.bathrooms || "1",
+    filter: params.filter || "All",
+    bedrooms: params.bedrooms || 1,
+    bathrooms: params.bathrooms || 1,
   });
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
-    if (item.category === filters.propertyType || item.category === "All") {
+    if (item.category === filters.filter) {
       setFilters((oldFilters) => {
-        return { ...oldFilters, propertyType: "All" };
+        return { ...oldFilters, filter: "All" };
       });
       return;
     }
 
     setFilters((oldFilters) => {
-      return { ...oldFilters, propertyType: item.category };
+      return { ...oldFilters, filter: item.category };
     });
   };
 
@@ -128,6 +134,31 @@ const AdditionalFilters = ({
     }
   };
 
+  const handleApplyFilters = () => {
+    const newFilters = {
+      filter: filters.filter === "All" ? "" : filters.filter,
+      bathrooms: filters.bathrooms === 1 ? "" : filters.bathrooms,
+      bedrooms: filters.bedrooms === 1 ? "" : filters.bedrooms,
+      maximumPrice: filters.maximumPrice === "5000" ? "" : filters.maximumPrice,
+      minimumPrice: filters.minimumPrice === "0" ? "" : filters.minimumPrice,
+    };
+
+    actionSheetRef.current?.hide();
+    router.setParams({ ...newFilters });
+  };
+
+  const handleResetFilters = () => {
+    setFilters(() => {
+      return {
+        bathrooms: 1,
+        bedrooms: 1,
+        filter: "All",
+        maximumPrice: "5000",
+        minimumPrice: "0",
+      };
+    });
+  };
+
   return (
     <ActionSheet containerStyle={{ height: "80%" }} ref={actionSheetRef}>
       <View className="px-6 py-6">
@@ -139,7 +170,7 @@ const AdditionalFilters = ({
             <Image source={icons.backArrow} className="size-6" />
           </TouchableOpacity>
           <Text className="font-rubik-medium">Filter</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleResetFilters}>
             <Text className="font-rubik-medium text-primary-100">Reset</Text>
           </TouchableOpacity>
         </View>
@@ -192,7 +223,7 @@ const AdditionalFilters = ({
               return (
                 <TouchableOpacity
                   className={`justify-center px-3 py-2 border border-gray-300 rounded-3xl ${
-                    item.category === filters.propertyType
+                    item.category === filters.filter
                       ? "bg-primary-100 text-white"
                       : "bg-primary-200"
                   }`}
@@ -202,7 +233,7 @@ const AdditionalFilters = ({
                 >
                   <Text
                     className={`${
-                      item.category === filters.propertyType
+                      item.category === filters.filter
                         ? "text-white"
                         : "text-black-300"
                     }`}
@@ -230,7 +261,7 @@ const AdditionalFilters = ({
             />
           </View>
         </View>
-        <CustomButton title="Set Filter" />
+        <CustomButton title="Set Filter" onPress={handleApplyFilters} />
       </View>
     </ActionSheet>
   );

@@ -4,6 +4,7 @@ import { Redirect, Stack } from "expo-router";
 import { useClerk } from "@clerk/clerk-expo";
 import { useGlobalContext } from "../lib/useGlobalContext";
 import { getUser, updateUserPicture } from "../appwrite/appwrite";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 const RootLayout = () => {
   const { user } = useClerk();

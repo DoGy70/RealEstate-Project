@@ -26,6 +26,7 @@ import Reviews from "@/app/components/Reviews";
 import Agent from "@/app/components/Agent";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
 import images from "@/app/constants/images";
+import Checkout from "@/app/components/Checkout";
 
 const Property = () => {
   const { id } = useLocalSearchParams();
@@ -236,8 +237,8 @@ const Property = () => {
                   renderItem={({ item }) => {
                     return <Facility facility={item} key={item} />;
                   }}
-                  contentContainerClassName="justify-center items-center gap-5"
-                  columnWrapperClassName="gap-7 justify-center"
+                  contentContainerClassName="justify-center items-center"
+                  columnWrapperClassName="gap-5 justify-center pt-3"
                   numColumns={4}
                 />
               </View>
@@ -284,24 +285,7 @@ const Property = () => {
         );
       }}
       ListFooterComponent={() => {
-        return (
-          <View
-            className="flex-row px-6 py-6 justify-between border-t border-l border-r border-primary-200 rounded-t-3xl items-center"
-            style={{ paddingBottom: insets.bottom }}
-          >
-            <View className="flex-col gap-2">
-              <Text className="uppercase text-sm font-rubik-medium text-black-300">
-                Price
-              </Text>
-              <Text className="text-3xl text-primary-100 font-rubik-bold">
-                ${property.price}
-              </Text>
-            </View>
-            <TouchableOpacity className="bg-primary-100 py-4 px-12 rounded-full shadow shadow-black-100">
-              <Text className="font-rubik text-white">Booking Now</Text>
-            </TouchableOpacity>
-          </View>
-        );
+        return <Checkout price={property.price} />;
       }}
     />
   );

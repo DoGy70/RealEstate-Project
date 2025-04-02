@@ -1,6 +1,6 @@
 import { View, Image, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import { getCoordinates } from "../lib/lib";
 
 const PropertyMap = ({
@@ -32,6 +32,7 @@ const PropertyMap = ({
   return (
     <View className="w-full h-[200px]">
       <MapView
+        provider={PROVIDER_DEFAULT}
         style={{ height: "100%", width: "100%", borderRadius: 15 }}
         region={{
           latitude: geolocation.latitude,

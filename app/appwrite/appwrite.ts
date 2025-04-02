@@ -1,5 +1,5 @@
 import { Client, ID, Databases, Query } from "react-native-appwrite";
-import { AppwriteUser, User } from "../lib/types";
+import { AppwriteUser, FetchFilteredProperties, User } from "../lib/types";
 
 const projectID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID;
 const platform = process.env.EXPO_PUBLIC_APPWRITE_PACKAGE_NAME;
@@ -87,22 +87,38 @@ export const updateUserPicture = async (
 };
 
 export const getFilteredFeaturedProperties = async (
-  query: string = "",
-  filter: string = "",
+  {
+    query,
+    filter,
+    minimumPrice,
+    maximumPrice,
+    bathrooms,
+    bedrooms,
+  }: FetchFilteredProperties,
   limit?: number
 ) => {
   try {
-    const queryBuilder = [
-      Query.and([
-        Query.contains("name", query),
-        Query.contains("type", filter),
-        Query.equal("featured", true),
-      ]),
-    ];
+    const andQuery = [];
+    if (query) andQuery.push(Query.contains("name", query));
 
-    if (limit) {
-      queryBuilder.push(Query.limit(limit));
+    if (filter) andQuery.push(Query.contains("type", filter));
+
+    if (minimumPrice && maximumPrice)
+      andQuery.push(Query.between("price", +minimumPrice, +maximumPrice));
+
+    if (bathrooms) andQuery.push(Query.equal("bathrooms", +bathrooms));
+
+    if (bedrooms) andQuery.push(Query.equal("bedrooms", +bedrooms));
+
+    const queryBuilder = [];
+
+    if (andQuery.length > 1) {
+      queryBuilder.push(Query.and([...andQuery]));
+    } else {
+      queryBuilder.push(...andQuery);
     }
+
+    if (limit) queryBuilder.push(Query.limit(limit));
 
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
@@ -142,21 +158,38 @@ export const getFilteredFeaturedProperties = async (
 };
 
 export const getFilteredProperties = async (
-  query: string = "",
-  filter: string = "",
+  {
+    query,
+    filter,
+    minimumPrice,
+    maximumPrice,
+    bathrooms,
+    bedrooms,
+  }: FetchFilteredProperties,
   limit?: number
 ) => {
   try {
-    const queryBuilder = [
-      Query.and([
-        Query.contains("name", query),
-        Query.contains("type", filter),
-      ]),
-    ];
+    const andQuery = [];
+    if (query) andQuery.push(Query.contains("name", query));
 
-    if (limit) {
-      queryBuilder.push(Query.limit(limit));
+    if (filter) andQuery.push(Query.contains("type", filter));
+
+    if (minimumPrice && maximumPrice)
+      andQuery.push(Query.between("price", +minimumPrice, +maximumPrice));
+
+    if (bathrooms) andQuery.push(Query.equal("bathrooms", +bathrooms));
+
+    if (bedrooms) andQuery.push(Query.equal("bedrooms", +bedrooms));
+
+    const queryBuilder = [];
+
+    if (andQuery.length > 1) {
+      queryBuilder.push(Query.and([...andQuery]));
+    } else {
+      queryBuilder.push(...andQuery);
     }
+
+    if (limit) queryBuilder.push(Query.limit(limit));
 
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
