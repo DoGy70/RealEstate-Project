@@ -6,6 +6,7 @@ import { useSearchParams } from "expo-router/build/hooks";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getFilteredProperties } from "../appwrite/property";
 import Card from "./Card";
+import NoResult from "./NoResult";
 
 const AllProperties = () => {
   const [properties, setProperties] = useState<PropertyType[] | null>();
@@ -75,9 +76,7 @@ const AllProperties = () => {
               <ActivityIndicator className="px-3 py-3 mb-4 bg-white rounded-lg w-1/2" />
             </View>
           ) : (
-            <View>
-              <Text>No properties found...</Text>
-            </View>
+            <NoResult />
           )
         }
         columnWrapperClassName="gap-4 justify-center"
