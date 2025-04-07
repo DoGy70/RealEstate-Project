@@ -10,16 +10,14 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/app/constants/icons";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
-import DateTimePicker, {
-  DateType,
-  useDefaultClassNames,
-  useDefaultStyles,
-} from "react-native-ui-datepicker";
+import DateTimePicker, { DateType } from "react-native-ui-datepicker";
 import Rooms from "@/app/components/Room";
 import ReactNativeModal from "react-native-modal";
 import CustomButton from "@/app/components/CustomButton";
 import { router } from "expo-router";
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
+import { createBooking } from "@/app/appwrite/booking";
+import { IntentCreationError } from "@stripe/stripe-react-native/lib/typescript/src/types/PaymentSheet";
 
 const Checkout = () => {
   const { property, user } = useGlobalContext();
@@ -28,9 +26,15 @@ const Checkout = () => {
   const [newEndDate, setNewEndDate] = useState<DateType>();
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const openPaymentSheet = async () => {
     try {
+      if (!newStartDate || !newEndDate) {
+        setError("Please, enter the start and end date.");
+        return;
+      }
+
       await initializePaymentSheet();
       const { error } = await presentPaymentSheet();
 
@@ -90,6 +94,19 @@ const Checkout = () => {
 
               const { result } = await response.json();
 
+              const booking = await createBooking(
+                user.id,
+                property.price,
+                new Date(newStartDate?.toString()!),
+                new Date(newEndDate?.toString()!),
+                new Date(),
+                property
+              );
+
+              if (!booking) {
+                throw new Error("Could not create booking");
+              }
+
               if (result.client_secret) {
                 intentCreationCallback({
                   clientSecret: result.client_secret,
@@ -98,6 +115,7 @@ const Checkout = () => {
             }
           } catch (error) {
             console.error(error);
+            intentCreationCallback({ error: error as IntentCreationError });
           }
         },
       },
@@ -218,15 +236,12 @@ const Checkout = () => {
             }}
             startDate={newStartDate}
             endDate={newEndDate}
+            timeZone="EEST"
             minDate={today}
+            timePicker={true}
             onChange={({ startDate, endDate }) => {
-              if (startDate != newStartDate) {
-                setNewStartDate(startDate);
-              }
-
-              if (endDate != newEndDate) {
-                setNewEndDate(endDate);
-              }
+              setNewStartDate(startDate);
+              setNewEndDate(endDate);
             }}
           />
           <StripeProvider
@@ -259,6 +274,7 @@ const Checkout = () => {
             placed.
           </Text>
 
+          <Text className="text-red-500">{error}</Text>
           <CustomButton
             title="Back Home"
             onPress={() => {

@@ -71,6 +71,7 @@ export const settings = [
   {
     title: "My Bookings",
     icon: icons.calendar,
+    href: "/(root)/profile/bookings",
   },
   {
     title: "Payments",

@@ -59,15 +59,15 @@ export declare interface PropertyType {
   geolocation: string;
   price: number;
   area: number;
-  bathrooms: number;
   bedrooms: number;
+  bathrooms: number;
   rating: number;
   facilities: facilityType[];
-  users: any;
   galleries: any;
   reviews: any;
   image: string;
   featured: boolean;
+  users: any;
 }
 
 export declare type facilityType =

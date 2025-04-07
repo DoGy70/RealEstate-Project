@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { Href, useRouter } from "expo-router";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { settings } from "@/app/constants/data";
@@ -67,6 +67,7 @@ export default function ProfileScreen() {
             className={`flex flex-row justify-between items-center ${
               item.title === "Payments" ? "border-b border-gray-200 pb-6" : ""
             } ${item.title === "Profile" ? "pt-1" : ""} mt-5`}
+            onPress={() => item.href && router.push(item.href as Href)}
           >
             <View className="flex flex-row items-center gap-3">
               <Image source={item.icon} className="size-8" />

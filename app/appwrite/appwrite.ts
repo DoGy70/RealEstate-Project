@@ -17,4 +17,5 @@ export const appwriteConfig = {
   galleriesCollection: process.env.EXPO_PUBLIC_APPWRITE_GALLERIES_COLLECTION_ID,
   propertiesCollection:
     process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID,
+  bookingsCollection: process.env.EXPO_PUBLIC_APPWRITE_BOOKINGS_COLLECTION_ID,
 };
