@@ -1,15 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
 import icons from "../constants/icons";
 import { useLocalSearchParams } from "expo-router/build/hooks";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { categories } from "../constants/data";
 import { router } from "expo-router";
 import Slider from "@react-native-community/slider";
@@ -39,8 +32,8 @@ const AdditionalFilters = ({
     maximumPrice: params.maximumPrice || "5000",
     minimumPrice: params.minimumPrice || "0",
     filter: params.filter || "All",
-    bedrooms: params.bedrooms || 1,
-    bathrooms: params.bathrooms || 1,
+    bedrooms: params.bedrooms || "",
+    bathrooms: params.bathrooms || "",
   });
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
@@ -137,8 +130,8 @@ const AdditionalFilters = ({
   const handleApplyFilters = () => {
     const newFilters = {
       filter: filters.filter === "All" ? "" : filters.filter,
-      bathrooms: filters.bathrooms === 1 ? "" : filters.bathrooms,
-      bedrooms: filters.bedrooms === 1 ? "" : filters.bedrooms,
+      bathrooms: filters.bathrooms,
+      bedrooms: filters.bedrooms,
       maximumPrice: filters.maximumPrice === "5000" ? "" : filters.maximumPrice,
       minimumPrice: filters.minimumPrice === "0" ? "" : filters.minimumPrice,
     };
@@ -150,8 +143,8 @@ const AdditionalFilters = ({
   const handleResetFilters = () => {
     setFilters(() => {
       return {
-        bathrooms: 1,
-        bedrooms: 1,
+        bathrooms: "",
+        bedrooms: "",
         filter: "All",
         maximumPrice: "5000",
         minimumPrice: "0",

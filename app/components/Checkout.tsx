@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Alert, Image } from "react-native";
 import React, { useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useGlobalContext } from "../lib/useGlobalContext";
-import { useStripe } from "@stripe/stripe-react-native";
+import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import ReactNativeModal from "react-native-modal";
 import icons from "../constants/icons";
 import CustomButton from "./CustomButton";
@@ -21,17 +21,22 @@ const Checkout = ({ property }: { property: PropertyType }) => {
   };
 
   const openPaymentSheet = async () => {
-    await initializePaymentSheet();
-    const { error } = await presentPaymentSheet();
+    try {
+      await initializePaymentSheet();
+      const { error } = await presentPaymentSheet();
 
-    if (error) {
-      if (error.code === "Canceled") return;
+      if (error) {
+        if (error.code === "Canceled") return;
 
-      Alert.alert(`Error code: ${error.code}`, error.message);
-    } else {
-      setSuccess(true);
+        Alert.alert(`Error code: ${error.code}`, error.message);
+      } else {
+        setSuccess(true);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
+
   const initializePaymentSheet = async () => {
     const { error } = await initPaymentSheet({
       merchantDisplayName: "RealEstate, Inc.",
@@ -56,10 +61,6 @@ const Checkout = ({ property }: { property: PropertyType }) => {
                 paymentMethodId: paymentMethod.id,
               }),
             });
-
-            if (!response.ok) {
-              throw new Error("Problem with");
-            }
 
             const { paymentIntent, customer } = await response.json();
 
@@ -116,38 +117,22 @@ const Checkout = ({ property }: { property: PropertyType }) => {
           className="bg-primary-100 py-4 px-12 rounded-full shadow shadow-black-100"
           onPress={handleCheckoutPress}
         >
+          <View className="flex-col gap-2">
+            <Text className="uppercase text-sm font-rubik-medium text-black-300">
+              Price
+            </Text>
+            <Text className="text-3xl text-primary-100 font-rubik-bold">
+              ${property.price}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="bg-primary-100 py-4 px-12 rounded-full shadow shadow-black-100"
+          onPress={openPaymentSheet}
+        >
           <Text className="font-rubik text-white">Booking Now</Text>
         </TouchableOpacity>
       </View>
-      <ReactNativeModal
-        isVisible={success}
-        onBackdropPress={() => setSuccess(false)}
-      >
-        <View className="flex flex-col items-center justify-center bg-white p-7 rounded-2xl">
-          <Image
-            source={icons.check}
-            className="w-28 h-28 mt-5 bg-green-500 rounded-full"
-          />
-
-          <Text className="text-2xl text-center font-JakartaBold mt-5">
-            Booking placed successfully
-          </Text>
-
-          <Text className="text-md text-general-200 font-JakartaRegular text-center mt-3">
-            Thank you for your booking. Your reservation has been successfully
-            placed.
-          </Text>
-
-          <CustomButton
-            title="Back Home"
-            onPress={() => {
-              setSuccess(false);
-              router.replace("/(root)/(tabs)/home");
-            }}
-            className="mt-5"
-          />
-        </View>
-      </ReactNativeModal>
     </View>
   );
 };

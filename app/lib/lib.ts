@@ -1,5 +1,3 @@
-import * as Location from "expo-location";
-
 export const getNumGalleries = (galleries: any) => {
   const numGalleriesDivided = galleries / 10;
   const numGalleries =

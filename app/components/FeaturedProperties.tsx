@@ -17,6 +17,7 @@ import { FeaturedCard } from "./Card";
 import Search from "./Search";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ActionSheetRef } from "react-native-actions-sheet";
+import NoResult from "./NoResult";
 
 const FeaturedProperties = ({
   actionSheetRef,
@@ -129,9 +130,7 @@ const FeaturedProperties = ({
               <ActivityIndicator className="w-[250px] h-[340px] justify-self-center bg-gray-300 rounded-2xl" />
             </View>
           ) : (
-            <View>
-              <Text>No items found...</Text>
-            </View>
+            <NoResult />
           )
         }
         keyExtractor={(item) => item.name}

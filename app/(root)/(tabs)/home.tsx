@@ -8,6 +8,7 @@ import AdditionalFilters from "@/app/components/AdditionalFilters";
 
 export default function HomeScreen() {
   const actionSheetRef = useRef<ActionSheetRef>(null);
+
   return (
     <FlatList
       ListHeaderComponent={() => {

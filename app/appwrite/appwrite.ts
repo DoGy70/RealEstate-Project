@@ -1,5 +1,4 @@
 import { Client, ID, Databases, Query } from "react-native-appwrite";
-import { AppwriteUser, FetchFilteredProperties, User } from "../lib/types";
 
 const projectID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID;
 const platform = process.env.EXPO_PUBLIC_APPWRITE_PACKAGE_NAME;

@@ -4,7 +4,7 @@ import { CardProps } from "../lib/types";
 import icons from "../constants/icons";
 import images from "../constants/images";
 import { useGlobalContext } from "../lib/useGlobalContext";
-import { addToFavorites, removeFromFavorites } from "../appwrite/appwrite";
+import { addToFavorites, removeFromFavorites } from "../appwrite/user";
 
 export const FeaturedCard = ({
   id,
