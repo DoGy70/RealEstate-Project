@@ -38,9 +38,10 @@ const Checkout = () => {
         if (error.code === "Canceled") return;
 
         Alert.alert(`Error code: ${error.code}`, error.message);
-      } else {
-        setSuccess(true);
+        return;
       }
+
+      setSuccess(true);
     } catch (error) {
       console.error(error);
     }
@@ -74,7 +75,6 @@ const Checkout = () => {
             const { paymentIntent, customer } = await response.json();
 
             if (paymentIntent?.client_secret) {
-              console.log(paymentMethod.id);
               const response = await fetch("/(api)/(stripe)/pay", {
                 method: "POST",
                 headers: {
