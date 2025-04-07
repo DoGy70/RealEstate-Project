@@ -7,12 +7,18 @@ import ReactNativeModal from "react-native-modal";
 import icons from "../constants/icons";
 import CustomButton from "./CustomButton";
 import { router } from "expo-router";
+import { PropertyType } from "../lib/types";
 
-const Checkout = ({ price }: { price: number }) => {
+const Checkout = ({ property }: { property: PropertyType }) => {
   const insets = useSafeAreaInsets();
-  const { user } = useGlobalContext();
+  const { user, setProperty } = useGlobalContext();
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [success, setSuccess] = useState(false);
+
+  const handleCheckoutPress = () => {
+    setProperty(property);
+    router.push("/(root)/property/checkout");
+  };
 
   const openPaymentSheet = async () => {
     await initializePaymentSheet();
@@ -31,7 +37,7 @@ const Checkout = ({ price }: { price: number }) => {
       merchantDisplayName: "RealEstate, Inc.",
       intentConfiguration: {
         mode: {
-          amount: price * 10,
+          amount: property.price * 10,
           currencyCode: "bgn",
         },
         confirmHandler: async (
@@ -46,7 +52,7 @@ const Checkout = ({ price }: { price: number }) => {
               body: JSON.stringify({
                 name: user.name,
                 email: user.email,
-                amount: price,
+                amount: property.price,
                 paymentMethodId: paymentMethod.id,
               }),
             });
@@ -103,12 +109,12 @@ const Checkout = ({ price }: { price: number }) => {
             Price
           </Text>
           <Text className="text-3xl text-primary-100 font-rubik-bold">
-            ${price}
+            ${property.price}
           </Text>
         </View>
         <TouchableOpacity
           className="bg-primary-100 py-4 px-12 rounded-full shadow shadow-black-100"
-          onPress={openPaymentSheet}
+          onPress={handleCheckoutPress}
         >
           <Text className="font-rubik text-white">Booking Now</Text>
         </TouchableOpacity>

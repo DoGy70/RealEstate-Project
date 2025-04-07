@@ -282,7 +282,7 @@ const Property = () => {
         );
       }}
       ListFooterComponent={() => {
-        return <Checkout price={property.price} />;
+        return <Checkout property={property} />;
       }}
     />
   );
