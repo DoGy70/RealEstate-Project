@@ -9,6 +9,9 @@ import DateTimePicker, {
   useDefaultStyles,
 } from "react-native-ui-datepicker";
 import Rooms from "@/app/components/Room";
+import ReactNativeModal from "react-native-modal";
+import CustomButton from "@/app/components/CustomButton";
+import { router } from "expo-router";
 
 const Checkout = () => {
   const { property } = useGlobalContext();
@@ -17,6 +20,7 @@ const Checkout = () => {
   );
   const [newEndDate, setNewEndDate] = useState<DateType>();
   const defaultClassNames = useDefaultStyles();
+  const [success, setSuccess] = useState(false);
 
   return (
     <ScrollView>
@@ -99,6 +103,35 @@ const Checkout = () => {
           />
         </View>
       </SafeAreaView>
+      <ReactNativeModal
+        isVisible={success}
+        onBackdropPress={() => setSuccess(false)}
+      >
+        <View className="flex flex-col items-center justify-center bg-white p-7 rounded-2xl">
+          <Image
+            source={icons.check}
+            className="w-28 h-28 mt-5 bg-green-500 rounded-full"
+          />
+
+          <Text className="text-2xl text-center font-JakartaBold mt-5">
+            Booking placed successfully
+          </Text>
+
+          <Text className="text-md text-general-200 font-JakartaRegular text-center mt-3">
+            Thank you for your booking. Your reservation has been successfully
+            placed.
+          </Text>
+
+          <CustomButton
+            title="Back Home"
+            onPress={() => {
+              setSuccess(false);
+              router.replace("/(root)/(tabs)/home");
+            }}
+            className="mt-5"
+          />
+        </View>
+      </ReactNativeModal>
     </ScrollView>
   );
 };
