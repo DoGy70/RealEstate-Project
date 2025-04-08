@@ -42,7 +42,7 @@ const GoogleLogin = () => {
     <View className="gap-2 w-full items-center justify-center">
       <View className="flex flex-row items-center gap-2">
         <View className="flex-1 h-[1px] bg-black-200" />
-        <Text className="font-rubik-medium">Or</Text>
+        <Text className="font-rubik-medium">Или</Text>
         <View className="flex-1 h-[1px] bg-black-200"></View>
       </View>
       <TouchableOpacity

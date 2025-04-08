@@ -81,14 +81,14 @@ export default function SignIn() {
               <CustomTextInput
                 value={login.email}
                 onChangeText={onEmailChange}
-                label="Email Address"
+                label="Имейл"
                 placeholder="email@example.com"
               />
               <CustomTextInput
                 value={login.password}
                 onChangeText={onPasswordChange}
-                label="Password"
-                placeholder="enter your password"
+                label="Парола"
+                placeholder="въведи своята парола"
                 password
               />
             </View>

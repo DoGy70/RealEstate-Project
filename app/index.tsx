@@ -19,7 +19,7 @@ export default function Index() {
         resizeMode="contain"
         className="h-[70%] w-full"
       />
-      <View className="flex flex-col items-center gap-y-4 ">
+      <View className="flex flex-col items-center gap-y-4">
         <Text className="uppercase font-rubik color-black-300">
           Добре Дошли В Real Scout
         </Text>
@@ -29,10 +29,10 @@ export default function Index() {
             Вашия Идеален Дом
           </Text>
         </Text>
-        <View className="flex flex-col items-center gap-y-2 w-full">
+        <View className="flex flex-col items-center gap-y-2 w-full ">
           <TouchableOpacity
             onPress={() => router.push("/(auth)/sign-up")}
-            className="bg-primary-100 px-32 py-3 rounded-full"
+            className="bg-primary-100 px-24 py-3 rounded-full"
           >
             <Text className="text-white font-rubik-bold">Регистрация</Text>
           </TouchableOpacity>
@@ -43,7 +43,7 @@ export default function Index() {
           </View>
           <TouchableOpacity
             onPress={() => router.push("/(auth)/sign-in")}
-            className="bg-white px-32 py-3 rounded-full border border-gray-300"
+            className="bg-white  px-32 py-3 rounded-full border border-gray-300"
           >
             <Text className="font-rubik-bold">Вход</Text>
           </TouchableOpacity>

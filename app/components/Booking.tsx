@@ -49,7 +49,7 @@ const Booking = (booking: BookingType) => {
         <View className="h-0.5 w-full bg-white" />
         <View className="flex-row justify-between items-cente my-4">
           <Text className="font-rubik text-black-200 text-sm">
-            Дата на заминаване
+            Дата на освобождаване
           </Text>
           <Text className="font-rubik">
             {new Date(booking.endDate).toLocaleDateString()}
