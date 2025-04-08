@@ -110,3 +110,13 @@ export declare interface FetchFilteredProperties {
   bathrooms: string | null;
   bedrooms: string | null;
 }
+
+export declare interface BookingType {
+  id: string;
+  property: PropertyType;
+  price: number;
+  startDate: Date;
+  endDate: Date;
+  dateBooked: Date;
+  user: AppwriteUser;
+}

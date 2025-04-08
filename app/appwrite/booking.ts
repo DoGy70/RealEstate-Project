@@ -8,10 +8,21 @@ export const getBookingsByUserId = async (userId: string) => {
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
       appwriteConfig.bookingsCollection!,
-      [Query.equal(userId, userId)]
+      [Query.equal("users", userId), Query.orderAsc("dateBooked")]
     );
 
-    if (response.total > 0) return response.documents;
+    if (response.total > 0)
+      return response.documents.map((document) => {
+        return {
+          id: document.$id,
+          property: document.properties,
+          price: document.price,
+          startDate: document.startDate,
+          endDate: document.endDate,
+          dateBooked: document.dateBooked,
+          user: document.users,
+        };
+      });
 
     return null;
   } catch (error) {
@@ -46,7 +57,6 @@ export const createBooking = async (
 
     return response.$id;
   } catch (error) {
-    console.log(error);
     console.error(error);
   }
 };
