@@ -86,7 +86,7 @@ const FeaturedProperties = ({
               </TouchableOpacity>
               <View className="flex-col justify-center gap-1">
                 <Text className="text-sm font-rubik text-gray-300">
-                  Good Morning
+                  Добро утро
                 </Text>
                 <Text className="font-rubik">{user?.firstName}</Text>
               </View>
@@ -95,12 +95,12 @@ const FeaturedProperties = ({
           </View>
           <Search actionSheetRef={actionSheetRef} />
           <View className="flex-row justify-between mb-4">
-            <Text className="text-xl font-rubik-bold">Featured</Text>
+            <Text className="text-xl font-rubik-bold">Ние препоръчваме</Text>
             <TouchableOpacity
               onPress={() => router.push("/(root)/(tabs)/explore")}
             >
               <Text className="text-lg font-rubik-bold text-primary-100">
-                See All
+                Виж всички
               </Text>
             </TouchableOpacity>
           </View>
@@ -130,7 +130,7 @@ const FeaturedProperties = ({
               <ActivityIndicator className="w-[250px] h-[340px] justify-self-center bg-gray-300 rounded-2xl" />
             </View>
           ) : (
-            <NoResult />
+            <NoResult title={"Няма намерени имоти..."} />
           )
         }
         keyExtractor={(item) => item.name}
@@ -139,10 +139,12 @@ const FeaturedProperties = ({
       />
       <View className="flex-col my-4">
         <View className="px-6 flex-row justify-between items-center">
-          <Text className="text-xl font-rubik-bold">Our Recommendation</Text>
-          <TouchableOpacity>
+          <Text className="text-xl font-rubik-bold">Представени имоти</Text>
+          <TouchableOpacity
+            onPress={() => router.push("/(root)/(tabs)/explore")}
+          >
             <Text className="text-lg font-rubik-bold text-primary-100">
-              See All
+              Виж всички
             </Text>
           </TouchableOpacity>
         </View>

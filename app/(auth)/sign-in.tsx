@@ -65,14 +65,14 @@ export default function SignIn() {
               Real<Text className="text-primary-100">Scout</Text>
             </Text>
             <Text className="font-rubik-light text-neutral-500">
-              Find your dream home
+              Намери мечтания си дом
             </Text>
           </View>
         </View>
         <View className="flex-1 mt-10 px-5 py-8 gap-5 shadow shadow-slate-200 bg-white rounded-xl">
           <View className="flex flex-col justify-center items-center gap-2">
             <Text className="font-rubik-bold text-2xl text-center">
-              Log In To Your Account
+              Влез в акаунта си
             </Text>
             <View className="h-[2px] w-1/2 bg-primary-100"></View>
           </View>
@@ -97,16 +97,18 @@ export default function SignIn() {
             )}
           </View>
           <View className="flex flex-col items-center justify-center gap-2">
-            <CustomButton title="Sign In" onPress={onSignInPress} />
+            <CustomButton title="Влез" onPress={onSignInPress} />
             <GoogleLogin />
           </View>
           <View className="flex flex-row justify-center">
             <Text className="font-rubik-medium text-gray-400">
-              Don't have an account?{" "}
-              <Link className="text-primary-100" href="/(auth)/sign-up">
-                Create Now
-              </Link>
+              Нямаш акаунт?{" "}
             </Text>
+            <TouchableOpacity onPress={() => router.push("/(auth)/sign-up")}>
+              <Text className="text-primary-100 font-rubik-medium">
+                Създай сега
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAwareScrollView>

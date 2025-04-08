@@ -1,10 +1,9 @@
 import { View, TextInput, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import icons from "../constants/icons";
-import { useDebounce, useDebouncedCallback } from "use-debounce";
+import { useDebouncedCallback } from "use-debounce";
 import { router, useLocalSearchParams } from "expo-router";
 import { ActionSheetRef } from "react-native-actions-sheet";
-import Title from "./Title";
 
 const Search = ({
   actionSheetRef,
@@ -28,7 +27,7 @@ const Search = ({
         <Image source={icons.search} className="size-6" />
         <TextInput
           className="flex-1 ml-2 font-rubik text-black-300 placeholder:text-black-300"
-          placeholder="Search something"
+          placeholder="Потърси нещо"
           value={search}
           onChangeText={handleSearch}
         />

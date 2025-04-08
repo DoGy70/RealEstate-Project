@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -122,14 +122,14 @@ export default function SignUpScreen() {
               Real<Text className="text-primary-100">Scout</Text>
             </Text>
             <Text className="font-rubik-light text-neutral-500">
-              Find your dream home
+              Намери мечтания си дом
             </Text>
           </View>
         </View>
         <View className="flex-1 mt-10 px-5 py-8 gap-5 shadow shadow-slate-200 bg-white rounded-xl">
           <View className="flex flex-col justify-center items-center gap-2">
             <Text className="font-rubik-bold text-3xl text-center">
-              Create an Account
+              Създай акаунт
             </Text>
             <View className="h-[2px] w-1/2 bg-primary-100"></View>
           </View>
@@ -138,20 +138,20 @@ export default function SignUpScreen() {
               <CustomTextInput
                 value={register.email}
                 onChangeText={onEmailChange}
-                label="Email Address"
+                label="Имейл Адрес"
                 placeholder="email@example.com"
               />
               <CustomTextInput
                 value={register.name}
                 onChangeText={onNameChange}
-                label="Name"
+                label="Име"
                 placeholder="John Doe"
               />
               <CustomTextInput
                 value={register.password}
                 onChangeText={onPasswordChange}
-                label="Password"
-                placeholder="enter your password"
+                label="Парола"
+                placeholder="въведи своята парола"
                 password
               />
             </View>
@@ -160,16 +160,21 @@ export default function SignUpScreen() {
             )}
           </View>
           <View className="flex flex-col items-center justify-center gap-2">
-            <CustomButton title="Sign Up" onPress={onSignUpPress} />
+            <CustomButton title="Регистрирай се" onPress={onSignUpPress} />
             <GoogleLogin />
           </View>
-          <View className="flex flex-row justify-center">
+          <View className="flex flex-row justify-center items-center">
             <Text className="font-rubik-medium text-gray-400">
-              Already have an account?{" "}
-              <Link className="text-primary-100" href="/(auth)/sign-in">
-                Sign in
-              </Link>
+              Вече имаш акаунт?{" "}
             </Text>
+            <TouchableOpacity
+              className="items-center"
+              onPress={() => router.push("/(auth)/sign-in")}
+            >
+              <Text className="text-primary-100 font-rubik-medium text-center">
+                Влез в него
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAwareScrollView>
@@ -183,10 +188,10 @@ export default function SignUpScreen() {
       >
         <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
           <Text className="font-rubik-extrabold text-2xl mb-2">
-            Verification
+            Верификация
           </Text>
           <Text className="font-rubik mb-5">
-            We've sent a verification code to {register.email}.
+            Изпратихме код за верификация до {register.email}.
           </Text>
           <CustomTextInput
             label={"Code"}
@@ -216,9 +221,11 @@ export default function SignUpScreen() {
               className="h-32 w-32"
             />
           </View>
-          <Text className="text-3xl font-rubik-bold text-center">Verified</Text>
+          <Text className="text-3xl font-rubik-bold text-center">
+            Верифициран
+          </Text>
           <Text className="text-base text-gray-400 font-rubik text-center mt-2">
-            You have successfully verified your account.
+            Успешно верифицира своя акаунт.
           </Text>
           <CustomButton
             title="Browse Home"

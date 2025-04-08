@@ -7,7 +7,10 @@ import {
   Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { BookingType } from "@/app/lib/types";
 import { getBookingsByUserId } from "@/app/appwrite/booking";
 import { useGlobalContext } from "@/app/lib/useGlobalContext";
@@ -57,13 +60,17 @@ const BookingsScreen = () => {
         );
       }}
       ListEmptyComponent={() =>
-        loading ? <ActivityIndicator /> : <NoResult />
+        loading ? (
+          <ActivityIndicator />
+        ) : (
+          <NoResult title={"Няма намерени резервации..."} />
+        )
       }
       renderItem={({ item }: { item: BookingType }) => {
         return <Booking {...item} />;
       }}
-      className="px-6"
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+      className="px-6"
     />
   );
 };

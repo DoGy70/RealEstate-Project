@@ -50,7 +50,7 @@ const GoogleLogin = () => {
         onPress={onPress}
       >
         <Image source={icons.google} className="size-6" resizeMode="contain" />
-        <Text className="font-rubik-bold">Continue With Google</Text>
+        <Text className="font-rubik-bold">Продължи с Google</Text>
       </TouchableOpacity>
     </View>
   );

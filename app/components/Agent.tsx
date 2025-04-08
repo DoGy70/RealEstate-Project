@@ -11,7 +11,7 @@ const Agent = ({ users }: { users: any }) => {
 
   return (
     <View className="gap-3">
-      <Title title="Agent" />
+      <Title title="Агент" />
       <View className="flex flex-row items-center justify-between">
         <View className="flex-row items-center gap-5">
           <Image
@@ -20,7 +20,9 @@ const Agent = ({ users }: { users: any }) => {
           />
           <View className="flex flex-col gap-1">
             <Text className="font-rubik-bold text-base">{users?.name}</Text>
-            <Text className="font-rubik text-black-300 text-sm">Owner</Text>
+            <Text className="font-rubik text-black-300 text-sm">
+              Собственик
+            </Text>
           </View>
         </View>
         <View className="flex-row gap-4">

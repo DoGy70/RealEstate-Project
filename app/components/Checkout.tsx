@@ -1,17 +1,12 @@
-import { View, Text, TouchableOpacity, Alert, Image } from "react-native";
-import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useGlobalContext } from "../lib/useGlobalContext";
-import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
-import ReactNativeModal from "react-native-modal";
-import icons from "../constants/icons";
-import CustomButton from "./CustomButton";
 import { router } from "expo-router";
 import { PropertyType } from "../lib/types";
 
 const Checkout = ({ property }: { property: PropertyType }) => {
   const insets = useSafeAreaInsets();
-  const { user, setProperty } = useGlobalContext();
+  const { setProperty } = useGlobalContext();
 
   return (
     <View>
@@ -21,20 +16,22 @@ const Checkout = ({ property }: { property: PropertyType }) => {
       >
         <View className="flex-col gap-2">
           <Text className="uppercase text-sm font-rubik-medium text-black-300">
-            Price
+            Цена
           </Text>
           <Text className="text-3xl text-primary-100 font-rubik-bold">
-            ${property.price}
+            {property.price}лв.
           </Text>
         </View>
         <TouchableOpacity
-          className="bg-primary-100 py-6 px-12 rounded-full shadow shadow-black-100 w-3/5 items-center"
+          className="bg-primary-100 py-6 rounded-full shadow shadow-black-100 w-3/5 items-center"
           onPress={() => {
             router.push("/(root)/property/checkout");
             setProperty(property);
           }}
         >
-          <Text className="font-rubik-bold text-white">Booking Now</Text>
+          <Text className="font-rubik-bold text-white tracking-wide ">
+            Резервирай Сега
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

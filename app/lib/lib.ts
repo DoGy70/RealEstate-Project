@@ -38,14 +38,14 @@ export function timeAgo(date: Date): string {
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
   if (diffInDays < 30) {
-    return `${diffInDays} day${diffInDays !== 1 ? "s" : ""} ago`;
+    return `преди ${diffInDays} ${diffInDays !== 1 ? "дни" : "ден"}`;
   }
 
   const diffInMonths = Math.floor(diffInDays / 30);
   if (diffInMonths < 12) {
-    return `${diffInMonths} month${diffInMonths !== 1 ? "s" : ""} ago`;
+    return `преди ${diffInMonths} ${diffInMonths !== 1 ? "месеца" : "месец"}`;
   }
 
   const diffInYears = Math.floor(diffInMonths / 12);
-  return `${diffInYears} year${diffInYears !== 1 ? "s" : ""} ago`;
+  return `преди ${diffInYears} ${diffInYears !== 1 ? "години" : "година"}`;
 }

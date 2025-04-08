@@ -1,11 +1,16 @@
 import { Text, TouchableOpacity, FlatList } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "../constants/data";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
+import { useSearchParams } from "expo-router/build/hooks";
 
 const Filters = () => {
-  const searchParams = useLocalSearchParams<{ filter?: string }>();
-  const [filter, setFilter] = useState(searchParams.filter || "All");
+  const searchParams = useSearchParams();
+  const [filter, setFilter] = useState(searchParams.get("filter") || "All");
+
+  useEffect(() => {
+    setFilter(searchParams.get("filter") || "All");
+  }, [searchParams.get("filter")]);
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
     if (item.category === filter || item.category === "All") {

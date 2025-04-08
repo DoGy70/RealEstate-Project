@@ -5,6 +5,7 @@ import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import * as Location from "expo-location";
 import { getCoordinates } from "../lib/lib";
 import { useDebounce, useDebouncedCallback } from "use-debounce";
+import { router } from "expo-router";
 
 const ExploreMap = ({ properties }: { properties: PropertyType[] }) => {
   const [propertiesWithGeolocation, setPropertiesWithGeolocation] =
@@ -75,8 +76,11 @@ const ExploreMap = ({ properties }: { properties: PropertyType[] }) => {
             }}
             key={property.id}
           >
-            <TouchableOpacity className="bg-white px-2 py-2 rounded-full">
-              <Text className="font-rubik underline">${property.price}</Text>
+            <TouchableOpacity
+              className="bg-white px-2 py-2 rounded-full"
+              onPress={() => router.push(`/(root)/property/${property.id}`)}
+            >
+              <Text className="font-rubik underline">{property.price}лв.</Text>
             </TouchableOpacity>
           </Marker>
         );

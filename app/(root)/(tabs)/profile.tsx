@@ -39,7 +39,7 @@ export default function ProfileScreen() {
         return (
           <View>
             <View className="flex-row justify-between items-center">
-              <Text className="font-rubik-bold text-xl">Profile</Text>
+              <Text className="font-rubik-bold text-xl">Профил</Text>
               <NotificationBell />
             </View>
             <View className="flex-col items-center mt-6 gap-3 pb-6 border-b border-gray-200">
@@ -84,7 +84,7 @@ export default function ProfileScreen() {
             onPress={handleSignout}
           >
             <Image source={icons.logout} className="size-8" />
-            <Text className="text-red-500 font-rubik-bold">Logout</Text>
+            <Text className="text-red-500 font-rubik-bold">Излез</Text>
           </TouchableOpacity>
         );
       }}

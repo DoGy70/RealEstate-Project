@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
 import icons from "../constants/icons";
-import { useLocalSearchParams } from "expo-router/build/hooks";
-import { useState } from "react";
+import { useLocalSearchParams, useSearchParams } from "expo-router/build/hooks";
+import { useEffect, useState } from "react";
 import { categories } from "../constants/data";
 import { router } from "expo-router";
 import Slider from "@react-native-community/slider";
@@ -15,13 +15,7 @@ const AdditionalFilters = ({
 }: {
   actionSheetRef: React.RefObject<ActionSheetRef>;
 }) => {
-  const params = useLocalSearchParams<{
-    filter?: string;
-    maximumPrice?: string;
-    minimumPrice?: string;
-    bedrooms?: string;
-    bathrooms?: string;
-  }>();
+  const params = useSearchParams();
   const [filters, setFilters] = useState<{
     filter: string;
     maximumPrice: string;
@@ -29,12 +23,16 @@ const AdditionalFilters = ({
     bedrooms: string | number;
     bathrooms: string | number;
   }>({
-    maximumPrice: params.maximumPrice || "5000",
-    minimumPrice: params.minimumPrice || "0",
-    filter: params.filter || "All",
-    bedrooms: params.bedrooms || "",
-    bathrooms: params.bathrooms || "",
+    maximumPrice: params.get("maximumPrice") || "5000",
+    minimumPrice: params.get("minimumPrice") || "0",
+    filter: params.get("filter") || "All",
+    bedrooms: params.get("bedrooms") || "",
+    bathrooms: params.get("bathrooms") || "",
   });
+
+  useEffect(() => {
+    setFilters({ ...filters, filter: params.get("filter") || "All" });
+  }, [params.get("filter")]);
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
     if (item.category === filters.filter) {
@@ -162,19 +160,19 @@ const AdditionalFilters = ({
           >
             <Image source={icons.backArrow} className="size-6" />
           </TouchableOpacity>
-          <Text className="font-rubik-medium">Filter</Text>
+          <Text className="font-rubik-medium">Филтри</Text>
           <TouchableOpacity onPress={handleResetFilters}>
             <Text className="font-rubik-medium text-primary-100">Reset</Text>
           </TouchableOpacity>
         </View>
         <View className="pb-2 pt-4">
-          <Title title="Price Range" />
+          <Title title="Ценови Диапазон" />
           <View className="gap-3">
             <View>
               <Text className="font-rubik-medium">
-                Maximum Price:{" "}
+                Максимална цена:{" "}
                 <Text className="font-rubik-bold text-primary-100">
-                  ${filters.maximumPrice}
+                  {filters.maximumPrice}лв.
                 </Text>
               </Text>
               <Slider
@@ -187,9 +185,9 @@ const AdditionalFilters = ({
             </View>
             <View>
               <Text className="font-rubik-medium">
-                Minimum Price:{" "}
+                Минимална цена:{" "}
                 <Text className="font-rubik-bold text-primary-100">
-                  ${filters.minimumPrice}
+                  {filters.minimumPrice}лв.
                 </Text>
               </Text>
               <Slider
@@ -209,7 +207,7 @@ const AdditionalFilters = ({
             numColumns={3}
             scrollEnabled={false}
             ListHeaderComponent={() => {
-              return <Title title="Property Type" />;
+              return <Title title="Тип Имот" />;
             }}
             data={categories}
             renderItem={({ item }) => {
@@ -238,23 +236,23 @@ const AdditionalFilters = ({
             }}
           />
           <View className="py-4 gap-3">
-            <Title title="Home Details" />
+            <Title title="Детайли За Имота" />
             <NumberInput
-              title="Bathrooms"
+              title="Бани"
               facility={filters.bathrooms}
               handleFacilityDecrease={handleBathroomsDecrease}
               handleFacilityIncrease={handleBathroomsIncrease}
             />
             <View className="border-b border-primary-200" />
             <NumberInput
-              title="Bedrooms"
+              title="Спални"
               facility={filters.bedrooms}
               handleFacilityDecrease={handleBedroomsDecrease}
               handleFacilityIncrease={handleBedroomsIncrease}
             />
           </View>
         </View>
-        <CustomButton title="Set Filter" onPress={handleApplyFilters} />
+        <CustomButton title="Задай Филтри" onPress={handleApplyFilters} />
       </View>
     </ActionSheet>
   );

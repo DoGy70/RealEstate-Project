@@ -31,7 +31,7 @@ const Checkout = () => {
   const openPaymentSheet = async () => {
     try {
       if (!newStartDate || !newEndDate) {
-        setError("Please, enter the start and end date.");
+        setError("Моля, въведете начална и крайна дата");
         return;
       }
 
@@ -56,7 +56,7 @@ const Checkout = () => {
       merchantDisplayName: "RealEstate, Inc.",
       intentConfiguration: {
         mode: {
-          amount: property.price * 10,
+          amount: property.price * 100,
           currencyCode: "bgn",
         },
         confirmHandler: async (
@@ -108,6 +108,7 @@ const Checkout = () => {
               }
 
               if (result.client_secret) {
+                setError("");
                 intentCreationCallback({
                   clientSecret: result.client_secret,
                 });
@@ -129,15 +130,15 @@ const Checkout = () => {
   return (
     <ScrollView className="mb-15">
       <SafeAreaView className="flex-1 px-6 py-4">
-        <View className="flex-row w-full items-center">
+        <View className="flex-row w-full items-center mb-3">
           <TouchableOpacity
             className="items-center bg-primary-200 rounded-full px-1 py-1"
             onPress={() => router.back()}
           >
             <Image source={icons.backArrow} className="size-6" />
           </TouchableOpacity>
-          <Text className="font-rubik-bold text-2xl ml-8">
-            Booking Information
+          <Text className="font-rubik-bold text-lg ml-8">
+            Информация за Резервацията
           </Text>
         </View>
         <View className="flex-col gap-5 items-center">
@@ -161,16 +162,16 @@ const Checkout = () => {
           </View>
           <View className="flex-col bg-primary-200 w-full gap-5 px-6 py-6 rounded-xl">
             <View className="flex-row justify-between items-center">
-              <Text className="font-rubik">Property Price</Text>
+              <Text className="font-rubik">Цена на Имота</Text>
               <Text className="font-rubik-medium text-green-500 text-lg">
-                {property.price} лв.
+                {property.price}лв.
               </Text>
             </View>
             <View className="w-full h-0.5 bg-white" />
             <View className="flex-row justify-between items-center">
-              <Text className="font-rubik">Agent Name</Text>
+              <Text className="font-rubik">Име на Агента</Text>
               <Text className="font-rubik-medium">
-                {property.users?.name || "No name"}
+                {property.users?.name || "Няма име"}
               </Text>
             </View>
             <View className="w-full h-0.5 bg-white" />
@@ -178,14 +179,14 @@ const Checkout = () => {
               <Rooms
                 icon={icons.bath}
                 number={property.bathrooms}
-                utility="baths"
+                utility={property.bathrooms > 1 ? "Бани" : "Баня"}
               />
               <Rooms
                 icon={icons.bed}
                 number={property.bedrooms}
-                utility="beds"
+                utility={property.bedrooms > 1 ? "Легла" : "Легло"}
               />
-              <Rooms icon={icons.area} number={property.area} utility="sqft" />
+              <Rooms icon={icons.area} number={property.area} utility="кв.м" />
             </View>
           </View>
           <DateTimePicker
@@ -244,11 +245,12 @@ const Checkout = () => {
               setNewEndDate(endDate);
             }}
           />
+          <Text className="text-red-500">{error}</Text>
           <StripeProvider
             publishableKey={process.env.EXPO_PUBLIC_STRIPE_API_KEY!}
           >
             <CustomButton
-              title="Book Now"
+              title="Резервирай Сега"
               className="mt-2"
               onPress={openPaymentSheet}
             />
@@ -265,18 +267,17 @@ const Checkout = () => {
             className="w-28 h-28 mt-5 bg-green-500 rounded-full"
           />
 
-          <Text className="text-2xl text-center font-JakartaBold mt-5">
-            Booking placed successfully
+          <Text className="text-2xl text-center font-rubik-bold mt-5">
+            Резервацията е успешна!
           </Text>
 
-          <Text className="text-md text-general-200 font-JakartaRegular text-center mt-3">
-            Thank you for your booking. Your reservation has been successfully
-            placed.
+          <Text className="text-md text-general-200 font-rubik text-center mt-3">
+            Благодарим за Вашата резервация! Резервацията Ви е завършена
+            успешно!
           </Text>
 
-          <Text className="text-red-500">{error}</Text>
           <CustomButton
-            title="Back Home"
+            title="Начало"
             onPress={() => {
               setSuccess(false);
               router.replace("/(root)/(tabs)/home");

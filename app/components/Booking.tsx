@@ -5,7 +5,7 @@ import icons from "../constants/icons";
 
 const Booking = (booking: BookingType) => {
   return (
-    <View className="flex-col px-6 py-6 bg-white rounded-lg gap-4">
+    <View className="flex-col px-6 py-6 bg-white rounded-lg gap-4 mb-10">
       <View className="flex-row gap-3 items-center">
         <Image
           source={{ uri: booking.property.image }}
@@ -55,6 +55,7 @@ const Booking = (booking: BookingType) => {
             {new Date(booking.endDate).toLocaleDateString()}
           </Text>
         </View>
+        <View className="h-0.5 w-full bg-white" />
         <View className="flex-row justify-between items-cente mt-4">
           <Text className="font-rubik text-black-200 text-sm">Цена</Text>
           <Text className="font-rubik-bold text-green-500">

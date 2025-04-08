@@ -15,6 +15,7 @@ export const getFilteredFeaturedProperties = async (
 ) => {
   try {
     const andQuery = [];
+    console.log(query);
     if (query) andQuery.push(Query.contains("name", query));
 
     if (filter) andQuery.push(Query.contains("type", filter));

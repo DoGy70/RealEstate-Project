@@ -69,36 +69,36 @@ export const categories = [
 
 export const settings = [
   {
-    title: "My Bookings",
+    title: "Моите резервации",
     icon: icons.calendar,
     href: "/(root)/profile/bookings",
   },
   {
-    title: "Payments",
+    title: "Плащания",
     icon: icons.wallet,
   },
   {
-    title: "Profile",
+    title: "Профил",
     icon: icons.person,
   },
   {
-    title: "Notifications",
+    title: "Нотификации",
     icon: icons.bell,
   },
   {
-    title: "Security",
+    title: "Сигурност",
     icon: icons.shield,
   },
   {
-    title: "Language",
+    title: "Език",
     icon: icons.language,
   },
   {
-    title: "Help Center",
+    title: "Помощ Център",
     icon: icons.info,
   },
   {
-    title: "Invite Friends",
+    title: "Покани Приятели",
     icon: icons.people,
   },
 ];

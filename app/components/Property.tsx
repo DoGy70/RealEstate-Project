@@ -99,7 +99,7 @@ const Property = ({
               }
             />
           </TouchableOpacity>
-          <Text className="font-rubik-bold text-primary-100">${price}</Text>
+          <Text className="font-rubik-bold text-primary-100">{price}лв.</Text>
         </View>
       </View>
     </TouchableOpacity>

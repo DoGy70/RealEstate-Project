@@ -32,12 +32,14 @@ const RootLayout = () => {
   }, [user?.id]);
 
   useEffect(() => {
-    fetchUser();
+    if (user) fetchUser();
   }, [fetchUser]);
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="profile" />
+      <Stack.Screen name="property" />
     </Stack>
   );
 };

@@ -1,5 +1,5 @@
 // app/(root)/(tabs)/_layout.js
-import { Tabs } from "expo-router";
+import { Stack, Tabs } from "expo-router";
 import { Image, ImageSourcePropType, View } from "react-native";
 import icons from "@/app/constants/icons";
 
@@ -38,7 +38,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: "Home",
+          title: "Начало",
           tabBarIcon: ({ focused }) => (
             <TabIcon icon={icons.house} focused={focused} />
           ),
@@ -47,7 +47,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
+          title: "Разгледай",
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.search} />
           ),
@@ -56,7 +56,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
+          title: "Профил",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.person}

@@ -1,6 +1,5 @@
 import { ID, Query } from "react-native-appwrite";
 import { appwriteConfig, databases } from "./appwrite";
-import { DateType } from "react-native-ui-datepicker";
 import { PropertyType } from "../lib/types";
 
 export const getBookingsByUserId = async (userId: string) => {

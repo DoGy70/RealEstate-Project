@@ -123,7 +123,11 @@ const Explore = () => {
           keyExtractor={(item) => item.id}
           contentContainerClassName="gap-3"
           ListEmptyComponent={() =>
-            loading ? <ActivityIndicator /> : <NoResult />
+            loading ? (
+              <ActivityIndicator />
+            ) : (
+              <NoResult title="Няма намерени имоти..." />
+            )
           }
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => <View></View>}

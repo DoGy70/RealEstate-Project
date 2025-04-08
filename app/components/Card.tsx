@@ -75,7 +75,7 @@ export const FeaturedCard = ({
           <Text className="font-rubik text-white">{location}</Text>
         </View>
         <View className="flex-row justify-between items-center">
-          <Text className="font-rubik-extrabold text-white">${price}</Text>
+          <Text className="font-rubik-extrabold text-white">{price}лв.</Text>
           <TouchableOpacity
             className="px-2 py-2"
             onPress={
@@ -159,7 +159,7 @@ const Card = ({
         </Text>
       </View>
       <View className="flex-row justify-between items-center">
-        <Text className="font-rubik-bold text-primary-100">${price}</Text>
+        <Text className="font-rubik-bold text-primary-100">{price}лв.</Text>
         <TouchableOpacity
           onPress={
             favorites.includes(id)

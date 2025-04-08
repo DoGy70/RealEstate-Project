@@ -195,7 +195,8 @@ const Property = () => {
                         {property.rating.toString()}{" "}
                       </Text>
                       <Text className="ml-0.5 font-rubik-medium text-sm text-black-300">
-                        ({property.reviews.length} reviews)
+                        ({property.reviews.length}{" "}
+                        {property.reviews.length !== 1 ? "ревюта" : "ревю"})
                       </Text>
                     </View>
                   </View>
@@ -204,17 +205,17 @@ const Property = () => {
                   <Rooms
                     icon={icons.bed}
                     number={property.bedrooms}
-                    utility={property.bedrooms > 1 ? "Beds" : "Bed"}
+                    utility={property.bedrooms > 1 ? "Легла" : "Лелго"}
                   />
                   <Rooms
                     icon={icons.bath}
                     number={property.bathrooms}
-                    utility={property.bathrooms > 1 ? "Baths" : "Bath"}
+                    utility={property.bathrooms > 1 ? "Бани" : "Баня"}
                   />
                   <Rooms
                     icon={icons.area}
                     number={property.area}
-                    utility={"sqft"}
+                    utility={"кв.м"}
                   />
                 </View>
               </View>
@@ -222,13 +223,13 @@ const Property = () => {
                 <Agent users={property.users} />
               </View>
               <View className="flex flex-col py-6 gap-3">
-                <Title title="Overview" />
+                <Title title="Описание" />
                 <Text className="font-rubik text-black-300">
                   {property.description}
                 </Text>
               </View>
               <View className="flex flex-col py-6 gap-3">
-                <Title title="Facilities" />
+                <Title title="Съоръжения" />
                 <FlatList
                   data={property.facilities}
                   renderItem={({ item }) => {
@@ -242,16 +243,16 @@ const Property = () => {
               <View className="flex flex-col py-6">
                 {property.galleries.length == 0 ? (
                   <View>
-                    <Title title="Gallery" />
+                    <Title title="Галерия" />
                     <Text className="font-rubik-bold text-primary-100">
-                      No gallery found...
+                      Няма намерена галерия...
                     </Text>
                   </View>
                 ) : (
                   <Gallery galleries={property.galleries} />
                 )}
                 <View className="flex flex-col py-6 gap-3">
-                  <Title title="Location" />
+                  <Title title="Локация" />
                   <View className="flex flex-row gap-3 items-center">
                     <Image source={icons.location} className="size-6" />
                     <Text className="font-rubik text-black-300">
@@ -263,9 +264,9 @@ const Property = () => {
                 <View className="flex-col pt-6 gap-3">
                   {property.reviews.length == 0 ? (
                     <View>
-                      <Title title="Reviews" />
+                      <Title title="Ревюта" />
                       <Text className="font-rubik-bold text-primary-100">
-                        No reviews found...
+                        Няма намерени ревюта...
                       </Text>
                     </View>
                   ) : (

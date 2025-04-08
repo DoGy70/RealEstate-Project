@@ -76,7 +76,7 @@ const AllProperties = () => {
               <ActivityIndicator className="px-3 py-3 mb-4 bg-white rounded-lg w-1/2" />
             </View>
           ) : (
-            <NoResult />
+            <NoResult title="Няма намерени имоти..." />
           )
         }
         columnWrapperClassName="gap-4 justify-center"

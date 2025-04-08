@@ -16,12 +16,12 @@ const Reviews = ({ rating, reviewNum, reviews }: ReviewsProps) => {
               {rating}
             </Text>
             <Text className="font-rubik-bold text-xl text-center">
-              ({reviewNum} {reviewNum > 1 ? "reviews" : "review"})
+              ({reviewNum} {reviewNum > 1 ? "ревюта" : "ревю"})
             </Text>
           </View>
         </View>
         <Text className="font-rubik-bold text-lg text-primary-100">
-          See All
+          Виж всички
         </Text>
       </View>
 
