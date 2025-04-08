@@ -10,7 +10,7 @@ import "react-native-gesture-handler";
 export default function Index() {
   const { user } = useClerk();
 
-  if (user) return <Redirect href="/(root)/(tabs)/home" />;
+  if (user) return <Redirect href="/(root)/(tabs)" />;
 
   return (
     <SafeAreaView className="flex flex-1 px-6 items-center bg-gray-50">

@@ -15,8 +15,13 @@ export const getFilteredFeaturedProperties = async (
 ) => {
   try {
     const andQuery = [];
-    console.log(query);
-    if (query) andQuery.push(Query.contains("name", query));
+    if (query)
+      andQuery.push(
+        Query.or([
+          Query.contains("name", query),
+          Query.contains("address", query),
+        ])
+      );
 
     if (filter) andQuery.push(Query.contains("type", filter));
 
@@ -40,7 +45,7 @@ export const getFilteredFeaturedProperties = async (
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
       appwriteConfig.propertiesCollection!,
-      [...queryBuilder]
+      [...queryBuilder, Query.equal("featured", true)]
     );
 
     if (response?.total === 0) return null;
@@ -87,7 +92,13 @@ export const getFilteredProperties = async (
 ) => {
   try {
     const andQuery = [];
-    if (query) andQuery.push(Query.contains("name", query));
+    if (query)
+      andQuery.push(
+        Query.or([
+          Query.contains("name", query),
+          Query.contains("address", query),
+        ])
+      );
 
     if (filter) andQuery.push(Query.contains("type", filter));
 

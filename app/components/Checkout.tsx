@@ -23,13 +23,13 @@ const Checkout = ({ property }: { property: PropertyType }) => {
           </Text>
         </View>
         <TouchableOpacity
-          className="bg-primary-100 py-6 rounded-full shadow shadow-black-100 w-3/5 items-center"
+          className="bg-primary-100 py-4 rounded-full shadow shadow-black-100 w-3/5 items-center"
           onPress={() => {
             router.push("/(root)/property/checkout");
             setProperty(property);
           }}
         >
-          <Text className="font-rubik-bold text-white tracking-wide ">
+          <Text className="font-rubik-bold text-lg text-white tracking-wide ">
             Резервирай Сега
           </Text>
         </TouchableOpacity>

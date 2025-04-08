@@ -194,7 +194,7 @@ export default function SignUpScreen() {
             Изпратихме код за верификация до {register.email}.
           </Text>
           <CustomTextInput
-            label={"Code"}
+            label={"Код"}
             placeholder={"12345"}
             value={verification.code}
             keyboardType="numeric"
@@ -206,7 +206,7 @@ export default function SignUpScreen() {
             </Text>
           )}
           <CustomButton
-            title="Verify"
+            title="Верифицирай"
             onPress={onVerifyPress}
             className="mt-5"
           />
@@ -228,12 +228,12 @@ export default function SignUpScreen() {
             Успешно верифицира своя акаунт.
           </Text>
           <CustomButton
-            title="Browse Home"
+            title="Начало"
             onPress={() => {
               setRegister({ email: "", password: "", name: "" });
               setVerification({ state: "", code: "", error: "" });
               setShowSuccessModal(false);
-              router.replace("/(root)/(tabs)/home");
+              router.replace("/(root)/(tabs)");
             }}
             className="mt-5"
           />

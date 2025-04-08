@@ -35,7 +35,7 @@ export default function SignIn() {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/(root)/(tabs)/home");
+        router.replace("/(root)/(tabs)");
       } else {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }

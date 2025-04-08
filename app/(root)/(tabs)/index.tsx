@@ -15,7 +15,6 @@ export default function HomeScreen() {
         return (
           <View>
             <FeaturedProperties actionSheetRef={actionSheetRef} />
-            {/* <Button title="seed" onPress={seed} /> */}
             <Filters />
           </View>
         );

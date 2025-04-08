@@ -255,7 +255,7 @@ const Property = () => {
                   <Title title="Локация" />
                   <View className="flex flex-row gap-3 items-center">
                     <Image source={icons.location} className="size-6" />
-                    <Text className="font-rubik text-black-300">
+                    <Text className="font-rubik text-black-300 pr-3">
                       {property.address}
                     </Text>
                   </View>
