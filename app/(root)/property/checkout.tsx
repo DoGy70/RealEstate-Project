@@ -281,7 +281,7 @@ const Checkout = () => {
               title="Начало"
               onPress={() => {
                 setSuccess(false);
-                router.replace("/(root)/(tabs)");
+                router.replace("/(root)/(tabs)/home");
               }}
               className="mt-5"
             />

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { ActionSheetRef } from "react-native-actions-sheet";
 import AllProperties from "@/app/components/AllProperties";
 import FeaturedProperties from "@/app/components/FeaturedProperties";
@@ -11,21 +11,19 @@ export default function HomeScreen() {
 
   return (
     <FlatList
-      ListHeaderComponent={() => {
-        return (
-          <View>
-            <FeaturedProperties actionSheetRef={actionSheetRef} />
-            <Filters />
-          </View>
-        );
-      }}
+      ListHeaderComponent={
+        <View>
+          <FeaturedProperties actionSheetRef={actionSheetRef} />
+          <Filters />
+        </View>
+      }
       data={["asd"]}
-      renderItem={() => {
+      renderItem={useCallback(() => {
         return <AllProperties />;
-      }}
-      ListFooterComponent={() => {
-        return <AdditionalFilters actionSheetRef={actionSheetRef} />;
-      }}
+      }, [])}
+      ListFooterComponent={
+        <AdditionalFilters actionSheetRef={actionSheetRef} />
+      }
       showsVerticalScrollIndicator={false}
     />
   );

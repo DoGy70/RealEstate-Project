@@ -2,15 +2,14 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import "./globals.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/app/constants/images";
-import { Link, Redirect, router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { useClerk } from "@clerk/clerk-expo";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 
 export default function Index() {
   const { user } = useClerk();
-
-  if (user) return <Redirect href="/(root)/(tabs)" />;
+  if (user) return <Redirect href="/(root)/(tabs)/home" />;
 
   return (
     <SafeAreaView className="flex flex-1 px-6 items-center bg-gray-50">

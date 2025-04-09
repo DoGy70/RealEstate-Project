@@ -6,7 +6,7 @@ import icons from "../constants/icons";
 
 const Agent = ({ users }: { users: any }) => {
   const handlePhoneButton = () => {
-    Linking.openURL("tel:+359885453051");
+    return Linking.openURL("tel:+359885453051");
   };
 
   return (

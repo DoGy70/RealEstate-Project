@@ -31,7 +31,7 @@ const GoogleLogin = () => {
 
       if (createdSessionId) {
         await setActive!({ session: createdSessionId });
-        router.replace("/(root)/(tabs)");
+        router.replace("/(root)/(tabs)/home");
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));

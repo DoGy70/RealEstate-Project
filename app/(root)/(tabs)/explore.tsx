@@ -75,27 +75,29 @@ const Explore = () => {
   ]);
 
   return (
-    <GestureHandlerRootView className="px-6">
+    <GestureHandlerRootView className="">
       <View style={{ paddingTop: insets.top }} className="flex-1">
         <View className="flex-col gap-3">
-          <View className="flex-row items-center justify-between">
-            <TouchableOpacity
-              className="px-2 py-2 bg-primary-200 rounded-full items-center"
-              onPress={() => router.back()}
-            >
-              <Image source={icons.backArrow} className="size-6" />
-            </TouchableOpacity>
-            <Text className="font-rubik-bold">Search Your Ideal Home</Text>
-            <TouchableOpacity
-              onPress={() => router.push("/(root)/(tabs)/profile")}
-            >
-              <Image
-                source={{ uri: user?.imageUrl }}
-                className="size-8 rounded-full"
-              />
-            </TouchableOpacity>
+          <View className="px-6">
+            <View className="flex-row items-center justify-between">
+              <TouchableOpacity
+                className="px-2 py-2 bg-primary-200 rounded-full items-center"
+                onPress={() => router.back()}
+              >
+                <Image source={icons.backArrow} className="size-6" />
+              </TouchableOpacity>
+              <Text className="font-rubik-bold">Search Your Ideal Home</Text>
+              <TouchableOpacity
+                onPress={() => router.push("/(root)/(tabs)/profile")}
+              >
+                <Image
+                  source={{ uri: user?.imageUrl }}
+                  className="size-8 rounded-full"
+                />
+              </TouchableOpacity>
+            </View>
+            <Search actionSheetRef={actionSheetRef} />
           </View>
-          <Search actionSheetRef={actionSheetRef} />
           <Filters />
         </View>
         <FlatList
@@ -121,6 +123,7 @@ const Explore = () => {
             );
           }}
           keyExtractor={(item) => item.id}
+          className="px-6"
           contentContainerClassName="gap-3"
           ListEmptyComponent={() =>
             loading ? (

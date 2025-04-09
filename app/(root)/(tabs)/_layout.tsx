@@ -1,7 +1,8 @@
 // app/(root)/(tabs)/_layout.js
-import { Stack, Tabs } from "expo-router";
+import { Redirect, Stack, Tabs } from "expo-router";
 import { Image, ImageSourcePropType, View } from "react-native";
 import icons from "@/app/constants/icons";
+import { useClerk } from "@clerk/clerk-expo";
 
 const TabIcon = ({
   icon,
@@ -36,7 +37,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: "Начало",
           tabBarIcon: ({ focused }) => (

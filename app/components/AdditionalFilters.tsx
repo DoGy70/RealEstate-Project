@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
 import icons from "../constants/icons";
-import { useLocalSearchParams, useSearchParams } from "expo-router/build/hooks";
+import { useSearchParams } from "expo-router/build/hooks";
 import { useEffect, useState } from "react";
 import { categories } from "../constants/data";
 import { router } from "expo-router";
