@@ -1,6 +1,7 @@
 import { Query } from "react-native-appwrite";
 import { FetchFilteredProperties } from "../lib/types";
 import { appwriteConfig, databases } from "./appwrite";
+import { getHighestPricedProperty } from "../lib/lib";
 
 export const getFilteredFeaturedProperties = async (
   {
@@ -102,8 +103,14 @@ export const getFilteredProperties = async (
 
     if (filter) andQuery.push(Query.contains("type", filter));
 
-    if (minimumPrice && maximumPrice)
-      andQuery.push(Query.between("price", +minimumPrice, +maximumPrice));
+    if (minimumPrice || maximumPrice)
+      andQuery.push(
+        Query.between(
+          "price",
+          minimumPrice ? +minimumPrice : 0,
+          maximumPrice ? +maximumPrice : 10000
+        )
+      );
 
     if (bathrooms) andQuery.push(Query.equal("bathrooms", +bathrooms));
 
@@ -236,4 +243,43 @@ export const getPropertyById = async (id: string) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const getHighestPriceProperty = async () => {
+  try {
+    const response = await databases.listDocuments(
+      appwriteConfig.databaseID!,
+      appwriteConfig.propertiesCollection!
+    );
+
+    if (response.total === 0) return null;
+
+    const properties = response.documents.map((document) => {
+      return {
+        id: document.$id,
+        name: document.name,
+        type: document.type,
+        description: document.description,
+        address: document.address,
+        geolocation: document.geolocation,
+        price: document.price,
+        area: document.area,
+        bathrooms: document.bathrooms,
+        bedrooms: document.bedrooms,
+        rating: document.rating,
+        facilities: document.facilities,
+        users: document.users,
+        galleries: document.galleries,
+        reviews: document.reviews,
+        image: document.image,
+        featured: document.featured,
+      };
+    });
+
+    const highestPricedProperty = getHighestPricedProperty(properties);
+
+    if (!highestPricedProperty) return null;
+
+    return highestPricedProperty;
+  } catch (error) {}
 };

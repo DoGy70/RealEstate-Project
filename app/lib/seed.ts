@@ -191,7 +191,6 @@ async function seed() {
           type: propertyTypes[Math.floor(Math.random() * propertyTypes.length)],
           description: `This is the description for Property ${i}.`,
           address: addresses[i],
-          geolocation: `192.168.1.${i}, 192.168.1.${i}`,
           price: Math.floor(Math.random() * 9000) + 1000,
           area: Math.floor(Math.random() * 3000) + 500,
           bedrooms: Math.floor(Math.random() * 5) + 1,

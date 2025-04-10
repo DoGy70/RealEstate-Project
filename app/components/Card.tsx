@@ -146,7 +146,7 @@ const Card = ({
   return (
     <TouchableOpacity
       onPress={() => onPropertyPress(id)}
-      className="flex-col px-3 py-3 mb-4 bg-white rounded-lg max-w-[180px]"
+      className="flex-col px-3 py-3 mb-4 bg-white rounded-lg max-w-[180px] justify-between"
     >
       <View className="gap-1">
         <Image
@@ -154,11 +154,11 @@ const Card = ({
           className="w-[159px] h-[154px] rounded-lg"
         />
         <Text className="font-rubik-bold">{title}</Text>
-        <Text className="font-rubik-light color-black-300 text-sm max-w-full">
+        <Text className="font-rubik-light color-black-300 text-xs max-w-full">
           {location}
         </Text>
       </View>
-      <View className="flex-row justify-between items-center">
+      <View className="flex-row justify-between items-center w-full">
         <Text className="font-rubik-bold text-primary-100">{price}лв.</Text>
         <TouchableOpacity
           onPress={

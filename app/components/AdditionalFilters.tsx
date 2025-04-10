@@ -9,6 +9,7 @@ import Slider from "@react-native-community/slider";
 import Title from "./Title";
 import NumberInput from "./NumberInput";
 import CustomButton from "./CustomButton";
+import { getHighestPriceProperty } from "../appwrite/property";
 
 const AdditionalFilters = ({
   actionSheetRef,
@@ -16,6 +17,7 @@ const AdditionalFilters = ({
   actionSheetRef: React.RefObject<ActionSheetRef>;
 }) => {
   const params = useSearchParams();
+  const [highestPrice, setHighestPrice] = useState(0);
   const [filters, setFilters] = useState<{
     filter: string;
     maximumPrice: string;
@@ -23,7 +25,10 @@ const AdditionalFilters = ({
     bedrooms: string | number;
     bathrooms: string | number;
   }>({
-    maximumPrice: params.get("maximumPrice") || "5000",
+    maximumPrice:
+      params.get("maximumPrice") || highestPrice.toString() === "0"
+        ? "6000"
+        : highestPrice.toString(),
     minimumPrice: params.get("minimumPrice") || "0",
     filter: params.get("filter") || "All",
     bedrooms: params.get("bedrooms") || "",
@@ -31,8 +36,22 @@ const AdditionalFilters = ({
   });
 
   useEffect(() => {
-    setFilters({ ...filters, filter: params.get("filter") || "All" });
-  }, [params.get("filter")]);
+    const getHighestPrice = async () => {
+      const property = await getHighestPriceProperty();
+
+      if (property) setHighestPrice(property.price);
+    };
+
+    getHighestPrice();
+  }, []);
+
+  useEffect(() => {
+    setFilters({
+      ...filters,
+      filter: params.get("filter") || "All",
+      maximumPrice: highestPrice.toString(),
+    });
+  }, [params.get("filter"), highestPrice]);
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
     if (item.category === filters.filter) {
@@ -177,7 +196,7 @@ const AdditionalFilters = ({
               </Text>
               <Slider
                 minimumValue={0}
-                maximumValue={5000}
+                maximumValue={highestPrice || 6000}
                 step={100}
                 value={+filters.maximumPrice}
                 onValueChange={(value) => handleMaximumPriceChange(value)}
@@ -192,7 +211,7 @@ const AdditionalFilters = ({
               </Text>
               <Slider
                 minimumValue={0}
-                maximumValue={5000}
+                maximumValue={highestPrice || 6000}
                 value={+filters.minimumPrice}
                 step={100}
                 onValueChange={(value) => handleMinimumPriceChange(value)}

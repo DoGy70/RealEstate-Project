@@ -1,3 +1,5 @@
+import { PropertyType } from "./types";
+
 export const getNumGalleries = (galleries: any) => {
   const numGalleriesDivided = galleries / 10;
   const numGalleries =
@@ -49,3 +51,13 @@ export function timeAgo(date: Date): string {
   const diffInYears = Math.floor(diffInMonths / 12);
   return `преди ${diffInYears} ${diffInYears !== 1 ? "години" : "година"}`;
 }
+
+export const getHighestPricedProperty = (properties: PropertyType[]) => {
+  if (properties.length === 0) return null;
+
+  return properties.reduce((maxProperty, currentProperty) => {
+    return currentProperty.price > maxProperty.price
+      ? currentProperty
+      : maxProperty;
+  }, properties[0]);
+};

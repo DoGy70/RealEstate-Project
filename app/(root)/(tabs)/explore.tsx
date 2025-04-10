@@ -24,8 +24,6 @@ import AdditionalFilters from "@/app/components/AdditionalFilters";
 import { ActionSheetRef } from "react-native-actions-sheet";
 import NoResult from "@/app/components/NoResult";
 import ExploreMap from "@/app/components/ExploreMap";
-import * as Location from "expo-location";
-import { getCoordinates } from "@/app/lib/lib";
 
 const Explore = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);

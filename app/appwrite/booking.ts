@@ -7,7 +7,7 @@ export const getBookingsByUserId = async (userId: string) => {
     const response = await databases.listDocuments(
       appwriteConfig.databaseID!,
       appwriteConfig.bookingsCollection!,
-      [Query.equal("users", userId), Query.orderAsc("dateBooked")]
+      [Query.equal("users", userId), Query.orderDesc("dateBooked")]
     );
 
     if (response.total > 0)
