@@ -3,17 +3,14 @@ import * as Linking from "expo-linking";
 import React from "react";
 import Title from "./Title";
 import icons from "../constants/icons";
-import { useGlobalContext } from "@/lib/useGlobalContext";
 
 const Agent = ({ users }: { users: any }) => {
-  const { user } = useGlobalContext();
-
   const handlePhoneButton = () => {
     return Linking.openURL("tel:+359885453051");
   };
 
   const handleMessageButton = () => {
-    return Linking.openURL(`mailto:${user?.email}`);
+    return Linking.openURL(`mailto:${users.email}`);
   };
 
   return (
