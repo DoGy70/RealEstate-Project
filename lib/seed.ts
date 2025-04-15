@@ -1,5 +1,5 @@
 import { ID } from "react-native-appwrite";
-import { databases, appwriteConfig } from "../app/appwrite/appwrite";
+import { databases, appwriteConfig } from "@/appwrite/appwrite";
 import {
   agentImages,
   galleryImages,
@@ -141,9 +141,9 @@ async function seed() {
         ID.unique(),
         {
           name: `Reviewer ${i}`,
-          avatar: reviewImages[Math.floor(Math.random() * reviewImages.length)],
           review: `This is a review by Reviewer ${i}.`,
           rating: Math.floor(Math.random() * 5) + 1, // Rating between 1 and 5
+          users: users[Math.floor(Math.random() * users.length)].$id,
         }
       );
       reviews.push(review);

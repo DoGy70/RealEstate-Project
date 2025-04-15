@@ -9,7 +9,7 @@ const Review = ({ review }: { review: ReviewType }) => {
     <View className="flex-col gap-3">
       <View className="flex-row gap-2 items-center">
         <Image
-          source={{ uri: review?.avatar }}
+          source={{ uri: review?.users?.imageUrl }}
           className="size-12 rounded-full"
         />
         <Text className="font-rubik-bold">{review.name}</Text>

@@ -92,6 +92,7 @@ export declare interface ReviewType {
   review: string;
   rating: number;
   properties: PropertyType;
+  users: AppwriteUser;
   $createdAt: string;
 }
 
