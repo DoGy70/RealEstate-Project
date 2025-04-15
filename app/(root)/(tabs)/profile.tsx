@@ -84,7 +84,7 @@ export default function ProfileScreen() {
             onPress={handleSignout}
           >
             <Image source={icons.logout} className="size-8" />
-            <Text className="text-red-500 font-rubik-bold">Излез</Text>
+            <Text className="text-red-500 font-rubik-bold">Изход</Text>
           </TouchableOpacity>
         );
       }}
