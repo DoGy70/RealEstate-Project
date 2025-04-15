@@ -3,10 +3,17 @@ import * as Linking from "expo-linking";
 import React from "react";
 import Title from "./Title";
 import icons from "../constants/icons";
+import { useGlobalContext } from "@/lib/useGlobalContext";
 
 const Agent = ({ users }: { users: any }) => {
+  const { user } = useGlobalContext();
+
   const handlePhoneButton = () => {
     return Linking.openURL("tel:+359885453051");
+  };
+
+  const handleMessageButton = () => {
+    return Linking.openURL(`mailto:${user?.email}`);
   };
 
   return (
@@ -26,7 +33,7 @@ const Agent = ({ users }: { users: any }) => {
           </View>
         </View>
         <View className="flex-row gap-4">
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleMessageButton}>
             <Image source={icons.chat} className="size-8" />
           </TouchableOpacity>
           <TouchableOpacity onPress={handlePhoneButton}>

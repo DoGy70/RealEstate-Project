@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import CustomTextInput from "../../components/CustomTextInput";
 import images from "../../constants/images";
 import GoogleLogin from "../../components/GoogleLogin";
-import CustomButton from "../../components/CustomButton";
+import CustomButton from "@/components/CustomButton";
 
 export default function SignIn() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -35,6 +35,7 @@ export default function SignIn() {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
+        router.dismissAll();
         router.replace("/(root)/(tabs)/home");
       } else {
         console.error(JSON.stringify(signInAttempt, null, 2));
@@ -104,7 +105,12 @@ export default function SignIn() {
             <Text className="font-rubik-medium text-gray-400">
               Нямаш акаунт?{" "}
             </Text>
-            <TouchableOpacity onPress={() => router.push("/(auth)/sign-up")}>
+            <TouchableOpacity
+              onPress={() => {
+                router.dismiss();
+                router.push("/(auth)/sign-up");
+              }}
+            >
               <Text className="text-primary-100 font-rubik-medium">
                 Създай сега
               </Text>

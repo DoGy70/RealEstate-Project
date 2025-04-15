@@ -163,7 +163,7 @@ const AdditionalFilters = ({
         bathrooms: "",
         bedrooms: "",
         filter: "All",
-        maximumPrice: "5000",
+        maximumPrice: highestPrice.toString() || "5000",
         minimumPrice: "0",
       };
     });

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { router } from "expo-router";
 import icons from "../constants/icons";
 import { useGlobalContext } from "../lib/useGlobalContext";
-import { addToFavorites, removeFromFavorites } from "../app/appwrite/user";
+import { addToFavorites, removeFromFavorites } from "@/appwrite/user";
 
 interface PropertProps {
   id: string;

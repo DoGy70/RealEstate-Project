@@ -1,4 +1,4 @@
-import { Client, ID, Databases, Query } from "react-native-appwrite";
+import { Client, Databases } from "react-native-appwrite";
 
 const projectID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID;
 const platform = process.env.EXPO_PUBLIC_APPWRITE_PACKAGE_NAME;

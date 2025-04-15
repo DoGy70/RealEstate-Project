@@ -1,10 +1,9 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { PropertyType } from "../lib/types";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import * as Location from "expo-location";
 import { getCoordinates } from "../lib/lib";
-import { useDebounce, useDebouncedCallback } from "use-debounce";
 import { router } from "expo-router";
 
 const ExploreMap = ({ properties }: { properties: PropertyType[] }) => {

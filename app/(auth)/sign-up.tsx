@@ -169,7 +169,10 @@ export default function SignUpScreen() {
             </Text>
             <TouchableOpacity
               className="items-center"
-              onPress={() => router.push("/(auth)/sign-in")}
+              onPress={() => {
+                router.dismiss();
+                router.push("/(auth)/sign-in");
+              }}
             >
               <Text className="text-primary-100 font-rubik-medium text-center">
                 Влез в него
@@ -234,6 +237,7 @@ export default function SignUpScreen() {
               setVerification({ state: "", code: "", error: "" });
               setShowSuccessModal(false);
               router.replace("/(root)/(tabs)/home");
+              router.dismissAll();
             }}
             className="mt-5"
           />

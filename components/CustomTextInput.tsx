@@ -1,4 +1,4 @@
-import { View, Text, TextInput, KeyboardTypeOptions } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import React from "react";
 import { CustomTextInputProps } from "../lib/types";
 
