@@ -1,16 +1,16 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { isClerkAPIResponseError, useSignUp } from "@clerk/clerk-expo";
-import images from "../constants/images";
-import CustomTextInput from "../components/CustomTextInput";
-import GoogleLogin from "../components/GoogleLogin";
+import images from "../../constants/images";
+import CustomTextInput from "../../components/CustomTextInput";
+import GoogleLogin from "../../components/GoogleLogin";
 import { ReactNativeModal } from "react-native-modal";
-import icons from "../constants/icons";
-import CustomButton from "../components/CustomButton";
-import { addUser } from "../appwrite/user";
+import icons from "../../constants/icons";
+import CustomButton from "../../components/CustomButton";
+import { addUser } from "@/appwrite/user";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();

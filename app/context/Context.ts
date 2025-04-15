@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { AppwriteUser, PropertyType } from "../lib/types";
+import { AppwriteUser, PropertyType } from "../../lib/types";
 
 export const GlobalContext = createContext<{
   user: AppwriteUser;

@@ -1,9 +1,9 @@
-import { getFilteredProperties } from "@/app/appwrite/property";
-import Filters from "@/app/components/Filters";
-import Property from "@/app/components/Property";
-import Search from "@/app/components/Search";
-import icons from "@/app/constants/icons";
-import { PropertyType } from "@/app/lib/types";
+import { getFilteredProperties } from "@/appwrite/property";
+import Filters from "@/components/Filters";
+import Property from "@/components/Property";
+import Search from "@/components/Search";
+import icons from "@/constants/icons";
+import { PropertyType } from "@/lib/types";
 import { useClerk } from "@clerk/clerk-expo";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { router } from "expo-router";
@@ -20,10 +20,10 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import AdditionalFilters from "@/app/components/AdditionalFilters";
+import AdditionalFilters from "@/components/AdditionalFilters";
 import { ActionSheetRef } from "react-native-actions-sheet";
-import NoResult from "@/app/components/NoResult";
-import ExploreMap from "@/app/components/ExploreMap";
+import NoResult from "@/components/NoResult";
+import ExploreMap from "@/components/ExploreMap";
 
 const Explore = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);

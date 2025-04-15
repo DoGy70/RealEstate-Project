@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import "./globals.css";
 import { SafeAreaView } from "react-native-safe-area-context";
-import images from "@/app/constants/images";
+import images from "@/constants/images";
 import { Redirect, router } from "expo-router";
 import { useClerk } from "@clerk/clerk-expo";
 import "react-native-reanimated";

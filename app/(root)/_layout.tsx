@@ -2,8 +2,8 @@ import React, { useCallback, useEffect } from "react";
 import { Redirect, Stack } from "expo-router";
 
 import { useClerk } from "@clerk/clerk-expo";
-import { useGlobalContext } from "../lib/useGlobalContext";
-import { getUser, updateUserPicture } from "../appwrite/user";
+import { useGlobalContext } from "../../lib/useGlobalContext";
+import { getUser, updateUserPicture } from "@/appwrite/user";
 
 const RootLayout = () => {
   const { user } = useClerk();

@@ -1,7 +1,7 @@
 import { Query } from "react-native-appwrite";
-import { FetchFilteredProperties } from "../lib/types";
+import { FetchFilteredProperties } from "../../lib/types";
 import { appwriteConfig, databases } from "./appwrite";
-import { getHighestPricedProperty } from "../lib/lib";
+import { getHighestPricedProperty } from "../../lib/lib";
 
 export const getFilteredFeaturedProperties = async (
   {

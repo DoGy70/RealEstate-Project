@@ -1,5 +1,5 @@
 import { ID } from "react-native-appwrite";
-import { databases, appwriteConfig } from "../appwrite/appwrite";
+import { databases, appwriteConfig } from "../app/appwrite/appwrite";
 import {
   agentImages,
   galleryImages,

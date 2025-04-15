@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import icons from "../constants/icons";
 import { useSSO } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
-import { addUser, getUser } from "../appwrite/user";
+import { addUser, getUser } from "../app/appwrite/user";
 
 const GoogleLogin = () => {
   // Use the `useSSO()` hook to access the `startSSOFlow()` method

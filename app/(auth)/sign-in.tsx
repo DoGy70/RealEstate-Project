@@ -1,13 +1,13 @@
 import { isClerkAPIResponseError, useSignIn } from "@clerk/clerk-expo";
-import { Link, useRouter } from "expo-router";
-import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import CustomTextInput from "../components/CustomTextInput";
-import images from "../constants/images";
-import GoogleLogin from "../components/GoogleLogin";
-import CustomButton from "../components/CustomButton";
+import CustomTextInput from "../../components/CustomTextInput";
+import images from "../../constants/images";
+import GoogleLogin from "../../components/GoogleLogin";
+import CustomButton from "../../components/CustomButton";
 
 export default function SignIn() {
   const { signIn, setActive, isLoaded } = useSignIn();

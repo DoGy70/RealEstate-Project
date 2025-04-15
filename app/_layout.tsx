@@ -6,7 +6,7 @@ import * as Fonts from "expo-font";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
 import { GlobalContext } from "./context/Context";
-import { AppwriteUser, PropertyType } from "./lib/types";
+import { AppwriteUser, PropertyType } from "../lib/types";
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);

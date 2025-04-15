@@ -1,11 +1,10 @@
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { ActionSheetRef } from "react-native-actions-sheet";
-import AllProperties from "@/app/components/AllProperties";
-import FeaturedProperties from "@/app/components/FeaturedProperties";
-import Filters from "@/app/components/Filters";
-import { FlatList, Pressable, Text, View } from "react-native";
-import AdditionalFilters from "@/app/components/AdditionalFilters";
-import seed from "@/app/lib/seed";
+import AllProperties from "@/components/AllProperties";
+import FeaturedProperties from "@/components/FeaturedProperties";
+import Filters from "@/components/Filters";
+import { FlatList, View } from "react-native";
+import AdditionalFilters from "@/components/AdditionalFilters";
 
 export default function HomeScreen() {
   const actionSheetRef = useRef<ActionSheetRef>(null);

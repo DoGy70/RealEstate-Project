@@ -1,8 +1,6 @@
-// app/(root)/(tabs)/_layout.js
-import { Redirect, Stack, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { Image, ImageSourcePropType, View } from "react-native";
-import icons from "@/app/constants/icons";
-import { useClerk } from "@clerk/clerk-expo";
+import icons from "@/constants/icons";
 
 const TabIcon = ({
   icon,

@@ -1,6 +1,6 @@
 import { ID, Query } from "react-native-appwrite";
 import { appwriteConfig, databases } from "./appwrite";
-import { PropertyType } from "../lib/types";
+import { PropertyType } from "../../lib/types";
 
 export const getBookingsByUserId = async (userId: string) => {
   try {

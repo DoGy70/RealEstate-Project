@@ -1,11 +1,11 @@
 import { Href, useRouter } from "expo-router";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { settings } from "@/app/constants/data";
+import { settings } from "@/constants/data";
 import { useClerk } from "@clerk/clerk-expo";
-import icons from "@/app/constants/icons";
-import NotificationBell from "@/app/components/NotificationBell";
-import { useGlobalContext } from "@/app/lib/useGlobalContext";
+import icons from "@/constants/icons";
+import NotificationBell from "@/components/NotificationBell";
+import { useGlobalContext } from "@/lib/useGlobalContext";
 import { useStripe } from "@stripe/stripe-react-native";
 
 export default function ProfileScreen() {

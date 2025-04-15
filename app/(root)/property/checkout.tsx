@@ -8,15 +8,15 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import icons from "@/app/constants/icons";
-import { useGlobalContext } from "@/app/lib/useGlobalContext";
+import icons from "@/constants/icons";
+import { useGlobalContext } from "@/lib/useGlobalContext";
 import DateTimePicker, { DateType } from "react-native-ui-datepicker";
-import Rooms from "@/app/components/Room";
+import Rooms from "@/components/Room";
 import ReactNativeModal from "react-native-modal";
-import CustomButton from "@/app/components/CustomButton";
+import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
-import { createBooking } from "@/app/appwrite/booking";
+import { createBooking } from "@/appwrite/booking";
 import { IntentCreationError } from "@stripe/stripe-react-native/lib/typescript/src/types/PaymentSheet";
 
 const Checkout = () => {

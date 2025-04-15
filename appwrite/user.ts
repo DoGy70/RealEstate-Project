@@ -1,5 +1,5 @@
 import { ID, Query } from "react-native-appwrite";
-import { User } from "../lib/types";
+import { User } from "../../lib/types";
 import { appwriteConfig, databases } from "./appwrite";
 
 export const addUser = async (user: User) => {

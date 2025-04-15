@@ -8,22 +8,22 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { addToFavorites, removeFromFavorites } from "@/app/appwrite/user";
-import { PropertyType } from "@/app/lib/types";
+import { addToFavorites, removeFromFavorites } from "@/appwrite/user";
+import { PropertyType } from "@/lib/types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
-import icons from "@/app/constants/icons";
-import Rooms from "@/app/components/Room";
-import Title from "@/app/components/Title";
-import Facility from "@/app/components/Facility";
-import Gallery from "@/app/components/Gallery";
-import Map from "@/app/components/Map";
-import Reviews from "@/app/components/Reviews";
-import Agent from "@/app/components/Agent";
-import { useGlobalContext } from "@/app/lib/useGlobalContext";
-import images from "@/app/constants/images";
-import Checkout from "@/app/components/Checkout";
-import { getPropertyById } from "@/app/appwrite/property";
+import icons from "@/constants/icons";
+import Rooms from "@/components/Room";
+import Title from "@/components/Title";
+import Facility from "@/components/Facility";
+import Gallery from "@/components/Gallery";
+import Map from "@/components/Map";
+import Reviews from "@/components/Reviews";
+import Agent from "@/components/Agent";
+import { useGlobalContext } from "@/lib/useGlobalContext";
+import images from "@/constants/images";
+import Checkout from "@/components/Checkout";
+import { getPropertyById } from "@/appwrite/property";
 
 const Property = () => {
   const { id } = useLocalSearchParams();

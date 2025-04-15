@@ -7,16 +7,13 @@ import {
   Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import { BookingType } from "@/app/lib/types";
-import { getBookingsByUserId } from "@/app/appwrite/booking";
-import { useGlobalContext } from "@/app/lib/useGlobalContext";
-import NoResult from "@/app/components/NoResult";
-import Booking from "@/app/components/Booking";
-import icons from "@/app/constants/icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BookingType } from "@/lib/types";
+import { getBookingsByUserId } from "@/appwrite/booking";
+import { useGlobalContext } from "@/lib/useGlobalContext";
+import NoResult from "@/components/NoResult";
+import Booking from "@/components/Booking";
+import icons from "@/constants/icons";
 import { router } from "expo-router";
 
 const BookingsScreen = () => {

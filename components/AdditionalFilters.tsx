@@ -9,7 +9,7 @@ import Slider from "@react-native-community/slider";
 import Title from "./Title";
 import NumberInput from "./NumberInput";
 import CustomButton from "./CustomButton";
-import { getHighestPriceProperty } from "../appwrite/property";
+import { getHighestPriceProperty } from "@/appwrite/property";
 
 const AdditionalFilters = ({
   actionSheetRef,
