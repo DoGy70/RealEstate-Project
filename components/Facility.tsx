@@ -5,19 +5,19 @@ import icons from "../constants/icons";
 
 const getFacilityImage = (facility: facilityType) => {
   switch (facility) {
-    case "Car Parking":
+    case "Паркинг":
       return icons.carPark;
-    case "Cutlery":
+    case "Прибори":
       return icons.cutlery;
-    case "Gym":
+    case "Фитнес":
       return icons.dumbell;
-    case "Laundry":
+    case "Пералня":
       return icons.laundry;
-    case "Pet Center":
+    case "Кът за любимци":
       return icons.dog;
-    case "Sports Center":
+    case "Спортен център":
       return icons.run;
-    case "Swimming pool":
+    case "Басейн":
       return icons.swim;
     case "Wifi":
       return icons.wifi;

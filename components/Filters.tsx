@@ -6,15 +6,15 @@ import { useSearchParams } from "expo-router/build/hooks";
 
 const Filters = () => {
   const searchParams = useSearchParams();
-  const [filter, setFilter] = useState(searchParams.get("filter") || "All");
+  const [filter, setFilter] = useState(searchParams.get("filter") || "Всички");
 
   useEffect(() => {
-    setFilter(searchParams.get("filter") || "All");
+    setFilter(searchParams.get("filter") || "Всички");
   }, [searchParams.get("filter")]);
 
   const handleSearchFilters = (item: { title: string; category: string }) => {
-    if (item.category === filter || item.category === "All") {
-      setFilter("All");
+    if (item.category === filter || item.category === "Всички") {
+      setFilter("Всички");
       router.setParams({ filter: "" });
       return;
     }

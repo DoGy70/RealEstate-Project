@@ -30,7 +30,7 @@ const AdditionalFilters = ({
         ? "6000"
         : highestPrice.toString(),
     minimumPrice: params.get("minimumPrice") || "0",
-    filter: params.get("filter") || "All",
+    filter: params.get("filter") || "Всички",
     bedrooms: params.get("bedrooms") || "",
     bathrooms: params.get("bathrooms") || "",
   });
@@ -48,7 +48,7 @@ const AdditionalFilters = ({
   useEffect(() => {
     setFilters({
       ...filters,
-      filter: params.get("filter") || "All",
+      filter: params.get("filter") || "Всички",
       maximumPrice: highestPrice.toString(),
     });
   }, [params.get("filter"), highestPrice]);
@@ -56,7 +56,7 @@ const AdditionalFilters = ({
   const handleSearchFilters = (item: { title: string; category: string }) => {
     if (item.category === filters.filter) {
       setFilters((oldFilters) => {
-        return { ...oldFilters, filter: "All" };
+        return { ...oldFilters, filter: "Всички" };
       });
       return;
     }
@@ -146,7 +146,7 @@ const AdditionalFilters = ({
 
   const handleApplyFilters = () => {
     const newFilters = {
-      filter: filters.filter === "All" ? "" : filters.filter,
+      filter: filters.filter === "Всички" ? "" : filters.filter,
       bathrooms: filters.bathrooms,
       bedrooms: filters.bedrooms,
       maximumPrice: filters.maximumPrice === "5000" ? "" : filters.maximumPrice,
@@ -162,7 +162,7 @@ const AdditionalFilters = ({
       return {
         bathrooms: "",
         bedrooms: "",
-        filter: "All",
+        filter: "Всички",
         maximumPrice: highestPrice.toString() || "5000",
         minimumPrice: "0",
       };

@@ -71,14 +71,14 @@ export declare interface PropertyType {
 }
 
 export declare type facilityType =
-  | "Laundry"
-  | "Car Parking"
-  | "Sports Center"
-  | "Cutlery"
-  | "Gym"
-  | "Swimming pool"
+  | "Пералня"
+  | "Паркинг"
+  | "Прибори"
+  | "Фитнес"
+  | "Басейн"
   | "Wifi"
-  | "Pet Center";
+  | "Спортен център"
+  | "Кът за любимци";
 
 export declare interface ReviewsProps {
   rating: number;

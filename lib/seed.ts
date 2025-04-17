@@ -1,11 +1,6 @@
 import { ID } from "react-native-appwrite";
 import { databases, appwriteConfig } from "@/appwrite/appwrite";
-import {
-  agentImages,
-  galleryImages,
-  propertiesImages,
-  reviewImages,
-} from "./data";
+import { agentImages, galleryImages, propertiesImages } from "./data";
 
 const COLLECTIONS = {
   USER: appwriteConfig.usersCollection!,
@@ -15,25 +10,23 @@ const COLLECTIONS = {
 };
 
 const propertyTypes = [
-  "House",
-  "Townhomes",
-  "Condos",
-  "Duplexes",
-  "Studios",
-  "Villa",
-  "Apartments",
-  "Others",
+  "Къща",
+  "Апартамент",
+  "Дуплекс",
+  "Студио",
+  "Вила",
+  "Друго",
 ];
 
 const facilities = [
-  "Laundry",
-  "Car Parking",
-  "Sports Center",
-  "Cutlery",
-  "Gym",
-  "Swimming pool",
+  "Пералня",
+  "Паркинг",
+  "Спортен център",
+  "Прибори",
+  "Фитнес",
+  "Басейн",
   "Wifi",
-  "Pet Center",
+  "Кът за любимци",
 ];
 
 const addresses = [
@@ -122,7 +115,7 @@ async function seed() {
         COLLECTIONS.USER!,
         ID.unique(),
         {
-          name: `Agent ${i}`,
+          name: `Агент ${i}`,
           email: `agent${i}@example.com`,
           imageUrl: agentImages[Math.floor(Math.random() * agentImages.length)],
           clerkId: `${i}`,
@@ -189,7 +182,7 @@ async function seed() {
         {
           name: `Property ${i}`,
           type: propertyTypes[Math.floor(Math.random() * propertyTypes.length)],
-          description: `This is the description for Property ${i}.`,
+          description: `Това е описание за имот ${i}.`,
           address: addresses[i],
           price: Math.floor(Math.random() * 9000) + 1000,
           area: Math.floor(Math.random() * 3000) + 500,
