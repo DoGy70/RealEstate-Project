@@ -20,7 +20,7 @@ export default function Index() {
       />
       <View className="flex flex-col items-center gap-y-4">
         <Text className="uppercase font-rubik color-black-300">
-          Добре Дошли В Real Scout
+          Добре Дошли В Scoutr
         </Text>
         <Text className="font-rubik-bold text-2xl text-center uppercase">
           Нека Ви доближим до{" "}

@@ -63,7 +63,7 @@ export default function SignIn() {
           />
           <View className="justify-center items-center gap-1">
             <Text className="text-2xl font-rubik-bold">
-              Real<Text className="text-primary-100">Scout</Text>
+              Scout<Text className="text-primary-100">R</Text>
             </Text>
             <Text className="font-rubik-light text-neutral-500">
               Намери мечтания си дом
