@@ -14,7 +14,7 @@ const Gallery = ({ galleries }: { galleries: any }) => {
 
   return (
     <View className="gap-3">
-      <Title title="Gallery" />
+      <Title title="Галерия" />
       <View className="flex flex-row gap-3">
         {galleries.slice(0, 3).map((gallery: { image: any }, index: number) => {
           if (index == 2) {
