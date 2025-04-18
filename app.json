@@ -67,6 +67,12 @@
         {
           "origin": "https://realestate-dev/"
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow ScoutR to use your location."
+        }
       ]
     ],
     "experiments": {
