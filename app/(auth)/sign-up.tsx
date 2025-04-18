@@ -236,8 +236,8 @@ export default function SignUpScreen() {
               setRegister({ email: "", password: "", name: "" });
               setVerification({ state: "", code: "", error: "" });
               setShowSuccessModal(false);
-              router.replace("/(root)/(tabs)/home");
               router.dismissAll();
+              router.replace("/(root)/(tabs)/home");
             }}
             className="mt-5"
           />
