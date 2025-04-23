@@ -102,8 +102,8 @@ const Explore = () => {
           ListHeaderComponent={() => {
             return (
               <Text className="font-rubik-bold text-xl">
-                Found {properties.length} Apartment
-                {properties.length === 1 ? "" : "s"}
+                Намерени {properties.length} Апартамент
+                {properties.length === 1 ? "а" : "и"}
               </Text>
             );
           }}
