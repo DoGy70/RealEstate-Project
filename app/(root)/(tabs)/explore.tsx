@@ -102,8 +102,8 @@ const Explore = () => {
           ListHeaderComponent={() => {
             return (
               <Text className="font-rubik-bold text-xl">
-                Намерени {properties.length} Апартамент
-                {properties.length === 1 ? "а" : "и"}
+                Намерени {properties.length} имот
+                {properties.length === 1 ? "" : "а"}
               </Text>
             );
           }}
@@ -138,7 +138,7 @@ const Explore = () => {
             className="absolute bottom-10 bg-black-100 flex-row px-4 py-3 items-center gap-3 rounded-full"
             onPress={() => bottomSheetRef.current?.expand()}
           >
-            <Text className="font-rubik text-white">Map</Text>
+            <Text className="font-rubik text-white">Карта</Text>
             <Ionicons name="map" color="white" size={16} />
           </TouchableOpacity>
         </View>
